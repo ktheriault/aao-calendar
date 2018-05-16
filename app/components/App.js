@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from "react";
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return <div>React is running!</div>
-  }
+    render() {
+        return <div>React is running!</div>
+    }
 
 };
 

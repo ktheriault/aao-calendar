@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux';
-import Example from '../components/Example';
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import Example from "../components/Example";
 
 const mapStateToProps = () => {
     return {}
