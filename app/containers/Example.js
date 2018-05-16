@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import Example from '../components/Example';
 
 const mapStateToProps = () => {
-  return {}
+    return {}
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  return {};
+    return {};
 };
 
-const Example = connect(mapStateToProps, mapDispatchToProps)(Link);
-export default Example;
+export default connect(mapStateToProps, mapDispatchToProps)(Example);

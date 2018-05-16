@@ -1,14 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 
 class Example extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-  }
+    render() {
+        return null;
+    }
 
 };
 

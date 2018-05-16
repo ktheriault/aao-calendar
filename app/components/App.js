@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import Example from '../containers/Example';
 
 class App extends Component {
 
