@@ -20,7 +20,9 @@
   "homepage": "https://github.com/ktheriault/aao-calendar#readme",
   "dependencies": {
     "jquery": "^3.3.1",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
