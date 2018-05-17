@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import EventSchedule from "../components/EventSchedule";
 import * as api from "../api";
 
 class App extends Component {
@@ -7,8 +8,7 @@ class App extends Component {
         super(props);
         this.state = {
             eventList: null,
-            selectedEvent: null,
-            selectedSessions: null,
+            selectedEventID: null,
             isLoading: true,
         };
         this.onEventSelectedHandler = this.onEventSelectedHandler.bind(this);
@@ -23,30 +23,19 @@ class App extends Component {
     }
 
     onEventSelectedHandler(eventID) {
-        return async () => {
-            let selectedEventData = await api.getEventByID(eventID, false, false, true);
-            // console.log(selectedEventData);
-            let selectedEvent = selectedEventData && selectedEventData.event ? {
-                ...selectedEventData.event,
-                startDate: new Date(Date.parse(selectedEventData.event.startDate)),
-                endDate: new Date(Date.parse(selectedEventData.event.endDate))
-            } : null;
-            let selectedSessions = selectedEventData && selectedEventData.related ? selectedEventData.related.sessions : null;
+        return () => {
             this.setState({
-                selectedEvent: selectedEvent,
-                selectedSessions: selectedSessions,
+                selectedEventID: eventID,
             });
-            // console.log(selectedEvent);
-            // console.log(selectedSessions);
         }
-    };
+    }
 
     render() {
-        let { eventList, selectedEvent, selectedSessions, isLoading } = this.state;
+        let { eventList, selectedEventID, isLoading } = this.state;
         return isLoading ? (
-            <div>Loading event list...</div>
+            <div style={{padding: "2em"}}>Loading event list...</div>
         ) : (
-            <div>
+            <div style={{padding: "2em"}}>
                 <div>
                     {eventList.map((event) => {
                         return (
@@ -58,16 +47,10 @@ class App extends Component {
                         )
                     })}
                 </div>
-                {selectedEvent ? (
-                    <div>
-                        <div>Name: {selectedEvent.title}</div>
-                        <div>Start date: {selectedEvent.startDate.toLocaleString()}</div>
-                        <div>End date: {selectedEvent.endDate.toLocaleString()}</div>
-                        <div>Number of sessions: {selectedSessions ? selectedSessions.length : "Unknown"}</div>
-                        {selectedSessions && selectedSessions.map((session, i) => {
-                            return <div key={session.id}>{i+1}. {session.title}</div>
-                        })}
-                    </div>
+                {selectedEventID ? (
+                    <EventSchedule
+                        eventID={selectedEventID}
+                    />
                 ) : (
                     <div>Select an event to see data!</div>
                 )}
