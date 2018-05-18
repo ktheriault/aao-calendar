@@ -1,0 +1,65 @@
+:root {
+    --hour-height: 6em;
+}
+
+.app-container {
+    padding: 2em;
+}
+
+.overflow-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.session-card {
+    border: 1px solid black;
+}
+
+.session-title-text {
+    font-size: 12px;
+}
+
+.session-speaker-text {
+    font-size: 10px;
+}
+
+.time-block-15 {
+    height: calc(var(--hour-height) * 0.25);
+}
+
+.time-block-20 {
+    height: calc(var(--hour-height) / 3);
+}
+
+.time-block-30 {
+    height: calc(var(--hour-height) * 0.5)
+}
+
+.time-block-45 {
+    height: calc(var(--hour-height) * 0.75);
+}
+
+.time-block-60 {
+    height: var(--hour-height);
+}
+
+.time-block-90 {
+    height: calc(var(--hour-height) * 1.5);
+}
+
+.time-block-120 {
+    height: calc(var(--hour-height) * 2);
+}
+
+.time-block-150 {
+    height: calc(var(--hour-height) * 2.5);
+}
+
+.time-block-180 {
+    height: calc(var(--hour-height) * 3);
+}
+
+.time-block-570 {
+    height: calc(var(--hour-height) * 9.5);
+}

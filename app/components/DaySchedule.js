@@ -48,7 +48,7 @@ export default class DaySchedule extends Component {
                     })}
                 </Nav>
                 <Grid>
-                    <Row style={{overflowX: "auto"}}>
+                    <Row>
                         {rooms && rooms.map((room) => {
                             let sessions = sessionsByRoom[room];
                             return (

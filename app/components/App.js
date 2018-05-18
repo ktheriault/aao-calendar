@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import classNames from "classnames";
 import EventSchedule from "../components/EventSchedule";
 import { EVENT_ID } from "../global";
+import "../style/App.css";
 
 class App extends Component {
 
@@ -10,7 +12,7 @@ class App extends Component {
 
     render() {
         return (
-            <div style={{padding: "2em"}}>
+            <div className={classNames("app-container")}>
                 <EventSchedule
                     eventID={EVENT_ID}
                 />

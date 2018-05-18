@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { HOUR_HEIGHT } from "../global";
+import classNames from "classnames";
+import { CSS_CLASS_DICTIONARY, HOUR_HEIGHT } from "../global";
+import "../style/App.css";
 
 export default class SessionCard extends Component {
 
@@ -12,8 +14,9 @@ export default class SessionCard extends Component {
         let { session } = this.props;
         let startTime = new Date(Date.parse(session.startDateTime));
         let endTime = new Date(Date.parse(session.endDateTime));
-        let sessionLength = (Date.parse(session.endDateTime) - Date.parse(session.startDateTime)) / 1000 / 3600;
-        let height = `${(sessionLength * HOUR_HEIGHT).toString()}em`;
+        let lengthInMinutes = (Date.parse(session.endDateTime) - Date.parse(session.startDateTime)) / 1000 / 60;
+        let heightClass = `time-block-${lengthInMinutes}`;
+        let cssClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];
 
         let speakers = [];
         session.sessionParts.forEach((sessionPart) => {
@@ -24,17 +27,22 @@ export default class SessionCard extends Component {
         });
 
         return (
-            <div style={{border: "1px solid black", height: height}}>
+            <div
+                className={classNames("session-card", heightClass)}
+                style={!cssClassExists ? { height: `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em` } : null}
+            >
                 {speakers.map((speaker) => {
                     let speakerName = `${speaker.firstName} ${speaker.lastName}`;
                     if (speaker.prefix) { speakerName = `${speaker.prefix} ${speakerName}`; }
                     return (
-                        <div style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: "10px"}}>
+                        <div className={classNames("overflow-text", "session-speaker-text")}>
                             {speakerName}
                         </div>
                     )
                 })}
-                <div style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: "10px"}}>{session.title}</div>
+                <div className={classNames("overflow-text", "session-title-text")}>
+                    {session.title}
+                </div>
             </div>
         )
     }

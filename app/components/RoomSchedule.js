@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import SessionCard from "../components/SessionCard";
+import "../style/App.css";
 
 export default class RoomSchedule extends Component {
 
@@ -12,7 +14,7 @@ export default class RoomSchedule extends Component {
         let { room, sessions } = this.props;
         return (
             <div>
-                <div style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+                <div className={classNames("overflow-text")}>
                     {room}
                 </div>
                 <div>
