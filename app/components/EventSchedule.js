@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { Nav, NavItem } from "react-bootstrap";
 import DaySchedule from "../components/DaySchedule";
 import * as api from "../api";
+import { SCHEDULE_VIEWS } from "../global";
 
 export default class EventSchedule extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedDayKey: 0,
+            selectedDayKey: null,
+            selectedViewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
             isLoading: true,
         }
     }
@@ -53,18 +55,25 @@ export default class EventSchedule extends Component {
             eventDays: eventDays,
             eventSessions: eventSessions,
             eventSessionsByDay: eventSessionsByDay,
+            selectedDayKey: eventDays.length > 0 ? eventDays[0] : null,
             isLoading: false,
         });
     }
 
-    onDaySelected = (selectedKey) => {
+    onDaySelected = (dayKey) => {
         this.setState({
-            selectedDayKey: selectedKey,
+            selectedDayKey: dayKey,
+        })
+    };
+
+    onViewChanged = (viewKey) => {
+        this.setState({
+            selectedViewKey: viewKey,
         })
     };
 
     render() {
-        let { selectedDayKey, eventInfo, eventDays, eventSessions, eventSessionsByDay, isLoading } = this.state;
+        let { selectedDayKey, selectedViewKey, eventInfo, eventDays, eventSessions, eventSessionsByDay, isLoading } = this.state;
         return isLoading ? (
             <div>Loading event data...</div>
         ) : (
@@ -76,16 +85,16 @@ export default class EventSchedule extends Component {
                 <Nav bsStyle="pills" activeKey={selectedDayKey} onSelect={this.onDaySelected}>
                     {eventDays.map((eventDay, i) => {
                         return (
-                            <NavItem key={eventDay} eventKey={i}>
+                            <NavItem key={eventDay} eventKey={eventDay}>
                                 {(new Date(Date.parse(eventDay)).toDateString())}
                             </NavItem>
                         );
                     })}
                 </Nav>
                 <DaySchedule
-                    view=""
-                    onViewChanged={() => {}}
-                    sessions={eventSessionsByDay[eventDays[selectedDayKey]]}
+                    viewKey={selectedViewKey}
+                    onViewChanged={this.onViewChanged}
+                    sessions={eventSessionsByDay[selectedDayKey]}
                 />
             </div>
         )

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Nav, NavItem } from "react-bootstrap";
+import { SCHEDULE_VIEWS } from "../global";
 
 export default class DaySchedule extends Component {
 
@@ -8,10 +10,24 @@ export default class DaySchedule extends Component {
     }
 
     render() {
-        let { sessions } = this.props;
-        return sessions && sessions.length > 0 ? (
+        let { viewKey, onViewChanged, sessions } = this.props;
+        let visibleSessions = sessions.filter((session) => {
+            return session[viewKey];
+        });
+        return visibleSessions && visibleSessions.length > 0 ? (
             <div>
-                {sessions.map((session, i) => {
+                <Nav bsStyle="tabs" activeKey={viewKey} onSelect={onViewChanged}>
+                    {Object.keys(SCHEDULE_VIEWS).map((scheduleView) => {
+                        let scheduleViewKey = SCHEDULE_VIEWS[scheduleView].key;
+                        let scheduleViewTitle = SCHEDULE_VIEWS[scheduleView].title;
+                        return (
+                            <NavItem key={scheduleViewKey} eventKey={scheduleViewKey}>
+                                {scheduleViewTitle}
+                            </NavItem>
+                        );
+                    })}
+                </Nav>
+                {visibleSessions.map((session, i) => {
                     return (
                         <div key={session.id}>
                             {i+1}. {session.title}
@@ -27,11 +43,12 @@ export default class DaySchedule extends Component {
 }
 
 DaySchedule.propTypes = {
-    view: PropTypes.string,
+    viewKey: PropTypes.string,
+    onViewChanged: PropTypes.func,
     sessions: PropTypes.array,
 };
 
 DaySchedule.defaultProps = {
-    view: null,
+    viewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
     sessions: [],
 };
