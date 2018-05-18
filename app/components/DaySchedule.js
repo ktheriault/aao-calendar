@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Nav, NavItem } from "react-bootstrap";
+import { Nav, NavItem, Grid, Row, Col } from "react-bootstrap";
+import RoomSchedule from "./RoomSchedule";
 import { SCHEDULE_VIEWS } from "../global";
 
 export default class DaySchedule extends Component {
@@ -14,6 +15,25 @@ export default class DaySchedule extends Component {
         let visibleSessions = sessions.filter((session) => {
             return session[viewKey];
         });
+        let sessionsByRoom = {};
+        visibleSessions.forEach((session) => {
+            let roomNumber = session.roomNumber;
+            if (sessionsByRoom[roomNumber]) {
+                sessionsByRoom[roomNumber] = [
+                    ...sessionsByRoom[roomNumber],
+                    session,
+                ];
+            } else {
+                sessionsByRoom[roomNumber] = [
+                    session,
+                ];
+            }
+        });
+        let rooms = Object.keys(sessionsByRoom);
+        rooms.sort();
+        let numberOfRooms = rooms.length;
+        let colSize = Math.max(numberOfRooms ? parseInt(12/numberOfRooms) : 4, 2);
+
         return visibleSessions && visibleSessions.length > 0 ? (
             <div>
                 <Nav bsStyle="tabs" activeKey={viewKey} onSelect={onViewChanged}>
@@ -27,13 +47,27 @@ export default class DaySchedule extends Component {
                         );
                     })}
                 </Nav>
-                {visibleSessions.map((session, i) => {
-                    return (
-                        <div key={session.id}>
-                            {i+1}. {session.title}
-                        </div>
-                    )
-                })}
+                <Grid>
+                    <Row style={{overflowX: "auto"}}>
+                        {rooms && rooms.map((room) => {
+                            let sessions = sessionsByRoom[room];
+                            return (
+                                <Col xsHidden sm={colSize}>
+                                    <RoomSchedule
+                                        room={room}
+                                        sessions={sessions}
+                                    />
+                                </Col>
+                            );
+                        })}
+                        <Col smHidden mdHidden lgHidden>
+                            <RoomSchedule
+                                room={rooms[0]}
+                                sessions={sessionsByRoom[rooms[0]]}
+                            />
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         ) : (
             <div>No sessions yet!</div>

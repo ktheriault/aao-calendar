@@ -10,3 +10,5 @@ export const SCHEDULE_VIEWS = {
         title: "For Staff"
     },
 };
+
+export const HOUR_HEIGHT = 5;
