@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { Nav, NavItem } from "react-bootstrap";
 import DaySchedule from "../components/DaySchedule";
 import * as api from "../api";
 import { SCHEDULE_VIEWS } from "../global";
+import "../style/App.css";
 
 export default class EventSchedule extends Component {
 
@@ -74,15 +76,56 @@ export default class EventSchedule extends Component {
 
     render() {
         let { selectedDayKey, selectedViewKey, eventInfo, eventDays, eventSessions, eventSessionsByDay, isLoading } = this.state;
-        return isLoading ? (
-            <div>Loading event data...</div>
-        ) : (
+
+        if (isLoading) {
+            return (
+                <div>Loading event data...</div>
+            );
+        }
+
+        let daySessions = eventSessionsByDay[selectedDayKey];
+        let visibleDaySessions = daySessions.filter((session) => {
+            return session[selectedViewKey];
+        });
+        let visibleDaySessionsByRoom = {};
+        visibleDaySessions.forEach((session) => {
+            let roomNumber = session.roomNumber;
+            if (visibleDaySessionsByRoom[roomNumber]) {
+                visibleDaySessionsByRoom[roomNumber] = [
+                    ...visibleDaySessionsByRoom[roomNumber],
+                    session,
+                ];
+            } else {
+                visibleDaySessionsByRoom[roomNumber] = [
+                    session,
+                ];
+            }
+        });
+        let rooms = Object.keys(visibleDaySessionsByRoom);
+        rooms.sort();
+
+        let dayStartTime = null;
+        if (visibleDaySessions && visibleDaySessions.length > 0) {
+            dayStartTime = new Date(visibleDaySessions[0].startDateTime);
+            dayStartTime.setHours(8);
+            dayStartTime.setMinutes(0);
+            dayStartTime.setSeconds(0);
+        }
+
+        return (
             <div>
-                <div>Name: {eventInfo.title}</div>
-                <div>Start date: {eventInfo.startDate.toDateString()}</div>
-                <div>End date: {eventInfo.endDate.toDateString()}</div>
-                <div>Number of sessions: {eventSessions ? eventSessions.length : "Unknown"}</div>
-                <Nav bsStyle="pills" activeKey={selectedDayKey} onSelect={this.onDaySelected}>
+                <div className={classNames("event-description")}>
+                    <div>Name: {eventInfo.title}</div>
+                    <div>Start date: {eventInfo.startDate.toDateString()}</div>
+                    <div>End date: {eventInfo.endDate.toDateString()}</div>
+                    <div>Number of sessions: {eventSessions ? eventSessions.length : "Unknown"}</div>
+                </div>
+                <Nav
+                    bsStyle="pills"
+                    className={classNames("event-day-selector")}
+                    activeKey={selectedDayKey}
+                    onSelect={this.onDaySelected}
+                >
                     {eventDays.map((eventDay, i) => {
                         return (
                             <NavItem key={eventDay} eventKey={eventDay}>
@@ -94,10 +137,11 @@ export default class EventSchedule extends Component {
                 <DaySchedule
                     viewKey={selectedViewKey}
                     onViewChanged={this.onViewChanged}
-                    sessions={eventSessionsByDay[selectedDayKey]}
+                    dayStartTime={dayStartTime}
+                    sessionsByRoom={visibleDaySessionsByRoom}
                 />
             </div>
-        )
+        );
     }
 }
 

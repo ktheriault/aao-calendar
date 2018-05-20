@@ -11,12 +11,18 @@ export default class SessionCard extends Component {
     }
 
     render() {
-        let { session } = this.props;
+        let { session, dayStartTime } = this.props;
         let startTime = new Date(Date.parse(session.startDateTime));
         let endTime = new Date(Date.parse(session.endDateTime));
-        let lengthInMinutes = (Date.parse(session.endDateTime) - Date.parse(session.startDateTime)) / 1000 / 60;
+        let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
         let heightClass = `time-block-${lengthInMinutes}`;
         let cssClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];
+
+        let blockSize = lengthInMinutes / 60 * HOUR_HEIGHT * 16;
+
+        let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
+        let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT * 16 / 60;
+        // console.log(minutesSinceDayStartTime, `${sessionLocationInPixels}px`, `${blockSize}px`, session.title);
 
         let speakers = [];
         session.sessionParts.forEach((sessionPart) => {
@@ -26,10 +32,19 @@ export default class SessionCard extends Component {
             ];
         });
 
+        let style = { top: `${sessionLocationInPixels} px` };
+        if (!cssClassExists) { style.height = `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em` }
+
         return (
             <div
+                name="Session"
                 className={classNames("session-card", heightClass)}
-                style={!cssClassExists ? { height: `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em` } : null}
+                style={!cssClassExists ? {
+                    height: `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em`,
+                    top: `${sessionLocationInPixels}px`,
+                } : {
+                    top: `${sessionLocationInPixels}px`
+                }}
             >
                 {speakers.map((speaker) => {
                     let speakerName = `${speaker.firstName} ${speaker.lastName}`;
@@ -43,6 +58,9 @@ export default class SessionCard extends Component {
                 <div className={classNames("overflow-text", "session-title-text")}>
                     {session.title}
                 </div>
+                <div className={classNames("overflow-text", "session-time-text")}>
+                    {`${startTime.toLocaleTimeString()} - ${endTime.toLocaleTimeString()}`}
+                </div>
             </div>
         )
     }
@@ -51,4 +69,5 @@ export default class SessionCard extends Component {
 
 SessionCard.propTypes = {
     session: PropTypes.object,
+    dayStartTime: PropTypes.object,
 };

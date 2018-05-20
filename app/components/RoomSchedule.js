@@ -11,21 +11,17 @@ export default class RoomSchedule extends Component {
     }
 
     render() {
-        let { room, sessions } = this.props;
+        let { sessions, dayStartTime } = this.props;
         return (
-            <div>
-                <div className={classNames("overflow-text")}>
-                    {room}
-                </div>
-                <div>
-                    {sessions && sessions.map((session) => {
-                        return (
-                            <SessionCard
-                                session={session}
-                            />
-                        );
-                     })}
-                </div>
+            <div name="RoomSchedule" className={classNames("sessions-container")}>
+                {sessions && sessions.map((session) => {
+                    return (
+                        <SessionCard
+                            session={session}
+                            dayStartTime={dayStartTime}
+                        />
+                    );
+                })}
             </div>
     )
     }
@@ -33,11 +29,10 @@ export default class RoomSchedule extends Component {
 }
 
 RoomSchedule.propTypes = {
-    room: PropTypes.string,
     sessions: PropTypes.array,
+    dayStartTime: PropTypes.object,
 };
 
 RoomSchedule.defaultProps = {
-    room: "",
     sessions: [],
 };

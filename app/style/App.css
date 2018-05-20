@@ -12,8 +12,62 @@
     white-space: nowrap;
 }
 
+.sessions-container {
+    position: relative;
+}
+
+.event-description {
+    margin-bottom: 1em;
+}
+
+.event-day-selector {
+    margin-bottom: 1em;
+}
+
+.day-schedule-filters {
+    margin-bottom: 0.5em;
+}
+
+.room-names {
+    display: flex;
+    justify-content: space-between;
+}
+
+.room-schedules {
+    display: flex;
+    justify-content: space-between;
+    height: 30em;
+    overflow-y: scroll;
+}
+
+.room-name-column {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    overflow: auto;
+    margin-right: 0.5em;
+}
+
+.room-calendar-column {
+    flex-grow: 1;
+    margin-right: 0.5em;
+}
+
+.room-name {
+    height: 2em;
+    margin-bottom: 0.5em;
+}
+
+.scrollbar {
+    width: 1em;
+}
+
 .session-card {
     border: 1px solid black;
+    position: absolute;
+    width: 100%;
+    padding: 0.5em;
+    overflow: hidden;
 }
 
 .session-title-text {
@@ -21,6 +75,10 @@
 }
 
 .session-speaker-text {
+    font-size: 10px;
+}
+
+.session-time-text {
     font-size: 10px;
 }
 
