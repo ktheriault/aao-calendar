@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
+import ScrollbarSize from "react-scrollbar-size";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import { SCHEDULE_VIEWS } from "../global";
@@ -14,6 +15,7 @@ export default class DaySchedule extends Component {
         this.state = {
             singleColumnView: false,
             selectedRoomIndex: 0,
+            scrollbarWidth: 0,
         };
     }
 
@@ -25,6 +27,18 @@ export default class DaySchedule extends Component {
     componentDidUnmount() {
         window.removeEventListener('resize', this.updateScreenSize);
     }
+
+    onScrollbarLoad = (measurements) => {
+        this.setState({
+            scrollbarWidth: measurements.scrollbarWidth,
+        })
+    };
+
+    onScrollbarChange = (measurements) => {
+        this.setState({
+            scrollbarWidth: measurements.scrollbarWidth,
+        })
+    };
 
     updateScreenSize = () => {
         this.setState({
@@ -42,7 +56,7 @@ export default class DaySchedule extends Component {
             dayStartTime,
             dayEndTime
         } = this.props;
-        let { singleColumnView } = this.state;
+        let { singleColumnView, scrollbarWidth } = this.state;
         let roomList = Object.keys(sessionsByRoom);
         let roomsToDisplay = singleColumnView ? roomList.slice(selectedRoomIndex, selectedRoomIndex + 1) : roomList;
 
@@ -96,7 +110,7 @@ export default class DaySchedule extends Component {
                                 </div>
                             );
                         })}
-                        <div className={classNames("scrollbar-placeholder")}/>
+                        <div style={{ width: `${scrollbarWidth}px` }}/>
                     </div>
                     <div className={classNames("room-schedules")}>
                         <Timeline
@@ -116,6 +130,10 @@ export default class DaySchedule extends Component {
                                 </div>
                             );
                         })}
+                        <ScrollbarSize
+                            onLoad={this.onScrollbarLoad}
+                            onChange={this.onScrollbarChange}
+                        />
                     </div>
                 </div>
             </div>

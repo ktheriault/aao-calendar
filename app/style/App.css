@@ -1,8 +1,9 @@
 :root {
     --hour-height: 96px;
     --timeline-width: 5em;
-    --column-margin: 0.5em;
+    --column-padding: 0.5em;
     --session-color: #dbfce7;
+    --calendar-grid-color: #e4e4e4;
 }
 
 .app-container {
@@ -45,15 +46,16 @@
 
 .room-name-column {
     flex-grow: 1;
-    flex-shrink: 1;
     flex-basis: 0;
     overflow: auto;
-    margin-right: var(--column-margin);
+    padding: 0 var(--column-padding);
+    border-left: 1px solid var(--calendar-grid-color);
 }
 
 .room-calendar-column {
     flex-grow: 1;
-    margin-right: var(--column-margin);
+    padding: 0 var(--column-padding);
+    border-left: 1px solid var(--calendar-grid-color);
 }
 
 .room-selector {
@@ -63,15 +65,11 @@
 
 .room-name {
     height: 2em;
-    margin-bottom: 0.5em;
+    margin: 0.5em 0;
 }
 
 .timeline-placeholder {
     width: var(--timeline-width);
-}
-
-.scrollbar-placeholder {
-    width: 1em;
 }
 
 .vertically-centered-time-placeholder {
@@ -90,13 +88,16 @@
 }
 
 .hour-rule {
+    border-color: var(--calendar-grid-color);
     position: absolute;
-    width: calc(100% + var(--column-margin));
+    left: calc(-1 * var(--column-padding));
+    width: calc(100% + 2 * var(--column-padding));
     margin: 0;
 }
 
 .session-card {
     border: 1px solid black;
+    border-radius: 4px;
     position: absolute;
     width: 100%;
     padding: 0.5em;
