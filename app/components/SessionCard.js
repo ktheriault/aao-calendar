@@ -11,18 +11,15 @@ export default class SessionCard extends Component {
     }
 
     render() {
-        let { session, dayStartTime } = this.props;
+        let { session, dayStartTime, verticalOffset } = this.props;
         let startTime = new Date(Date.parse(session.startDateTime));
         let endTime = new Date(Date.parse(session.endDateTime));
         let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
         let heightClass = `time-block-${lengthInMinutes}`;
-        let cssClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];
-
-        let blockSize = lengthInMinutes / 60 * HOUR_HEIGHT * 16;
+        let heightClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];
 
         let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
-        let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT * 16 / 60;
-        // console.log(minutesSinceDayStartTime, `${sessionLocationInPixels}px`, `${blockSize}px`, session.title);
+        let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT / 60;
 
         let speakers = [];
         session.sessionParts.forEach((sessionPart) => {
@@ -32,18 +29,15 @@ export default class SessionCard extends Component {
             ];
         });
 
-        let style = { top: `${sessionLocationInPixels} px` };
-        if (!cssClassExists) { style.height = `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em` }
-
         return (
             <div
                 name="Session"
                 className={classNames("session-card", heightClass)}
-                style={!cssClassExists ? {
-                    height: `${(lengthInMinutes / 60 * HOUR_HEIGHT).toString()}em`,
-                    top: `${sessionLocationInPixels}px`,
+                style={!heightClassExists ? {
+                    height: `${lengthInMinutes / 60 * HOUR_HEIGHT}px`,
+                    top: `${sessionLocationInPixels + verticalOffset}px`,
                 } : {
-                    top: `${sessionLocationInPixels}px`
+                    top: `${sessionLocationInPixels + verticalOffset}px`
                 }}
             >
                 {speakers.map((speaker) => {
@@ -70,4 +64,5 @@ export default class SessionCard extends Component {
 SessionCard.propTypes = {
     session: PropTypes.object,
     dayStartTime: PropTypes.object,
+    verticalOffset: PropTypes.number,
 };

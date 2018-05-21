@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem } from "react-bootstrap";
-import RoomSchedule from "./RoomSchedule";
+import Timeline from '../components/Timeline';
+import RoomSchedule from "../components/RoomSchedule";
 import { SCHEDULE_VIEWS } from "../global";
 import "../style/App.css";
 
@@ -32,7 +33,7 @@ export default class DaySchedule extends Component {
     };
 
     render() {
-        let { viewKey, onViewChanged, sessionsByRoom, dayStartTime } = this.props;
+        let { viewKey, onViewChanged, sessionsByRoom, dayStartTime, dayEndTime } = this.props;
         let { singleColumnView, selectedRoomIndex } = this.state;
         let rooms = Object.keys(sessionsByRoom);
         if (singleColumnView) {
@@ -59,6 +60,7 @@ export default class DaySchedule extends Component {
                 </Nav>
                 <div>
                     <div className={classNames("room-names")}>
+                        <div className={classNames("timeline-placeholder")}/>
                         {rooms && rooms.map((room) => {
                             return (
                                 <div className={classNames("room-name-column")}>
@@ -68,9 +70,13 @@ export default class DaySchedule extends Component {
                                 </div>
                             );
                         })}
-                        <div className={classNames("scrollbar")}></div>
+                        <div className={classNames("scrollbar-placeholder")}/>
                     </div>
                     <div className={classNames("room-schedules")}>
+                        <Timeline
+                            startTime={dayStartTime}
+                            endTime={dayEndTime}
+                        />
                         {rooms && rooms.map((room) => {
                             let sessions = sessionsByRoom[room];
                             return (
@@ -79,6 +85,7 @@ export default class DaySchedule extends Component {
                                         room={room}
                                         sessions={sessions}
                                         dayStartTime={dayStartTime}
+                                        dayEndTime={dayEndTime}
                                     />
                                 </div>
                             );
@@ -97,11 +104,13 @@ DaySchedule.propTypes = {
     viewKey: PropTypes.string,
     onViewChanged: PropTypes.func,
     dayStartTime: PropTypes.object,
+    dayEndTime: PropTypes.object,
     sessionsByRoom: PropTypes.object,
 };
 
 DaySchedule.defaultProps = {
     viewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
     dayStartTime: {},
+    dayEndTime: {},
     sessionsByRoom: {},
 };

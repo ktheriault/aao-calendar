@@ -104,12 +104,18 @@ export default class EventSchedule extends Component {
         let rooms = Object.keys(visibleDaySessionsByRoom);
         rooms.sort();
 
+        // TODO Calculate this.
         let dayStartTime = null;
+        let dayEndTime = null;
         if (visibleDaySessions && visibleDaySessions.length > 0) {
             dayStartTime = new Date(visibleDaySessions[0].startDateTime);
             dayStartTime.setHours(8);
             dayStartTime.setMinutes(0);
             dayStartTime.setSeconds(0);
+            dayEndTime = new Date(visibleDaySessions[visibleDaySessions.length - 1].endDateTime);
+            dayEndTime.setHours(18);
+            dayEndTime.setMinutes(0);
+            dayEndTime.setSeconds(0);
         }
 
         return (
@@ -138,6 +144,7 @@ export default class EventSchedule extends Component {
                     viewKey={selectedViewKey}
                     onViewChanged={this.onViewChanged}
                     dayStartTime={dayStartTime}
+                    dayEndTime={dayEndTime}
                     sessionsByRoom={visibleDaySessionsByRoom}
                 />
             </div>
