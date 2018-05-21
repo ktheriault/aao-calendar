@@ -14,6 +14,7 @@ export default class EventSchedule extends Component {
         this.state = {
             selectedDayKey: null,
             selectedViewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
+            selectedRoomIndex: 0,
             isLoading: true,
         }
     }
@@ -74,8 +75,25 @@ export default class EventSchedule extends Component {
         })
     };
 
+    getOnRoomChangedHandler = (i) => {
+        return () => {
+            this.setState({
+                selectedRoomIndex: i,
+            });
+        }
+    };
+
     render() {
-        let { selectedDayKey, selectedViewKey, eventInfo, eventDays, eventSessions, eventSessionsByDay, isLoading } = this.state;
+        let {
+            selectedDayKey,
+            selectedViewKey,
+            selectedRoomIndex,
+            eventInfo,
+            eventDays,
+            eventSessions,
+            eventSessionsByDay,
+            isLoading
+        } = this.state;
 
         if (isLoading) {
             return (
@@ -143,6 +161,8 @@ export default class EventSchedule extends Component {
                 <DaySchedule
                     viewKey={selectedViewKey}
                     onViewChanged={this.onViewChanged}
+                    selectedRoomIndex={selectedRoomIndex}
+                    getOnRoomChangedHandler={this.getOnRoomChangedHandler}
                     dayStartTime={dayStartTime}
                     dayEndTime={dayEndTime}
                     sessionsByRoom={visibleDaySessionsByRoom}

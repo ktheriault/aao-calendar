@@ -56,6 +56,11 @@
     margin-right: var(--column-margin);
 }
 
+.room-selector {
+    text-align: center;
+    padding: 0.5em 0;
+}
+
 .room-name {
     height: 2em;
     margin-bottom: 0.5em;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Nav, NavItem } from "react-bootstrap";
+import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import { SCHEDULE_VIEWS } from "../global";
@@ -33,12 +33,18 @@ export default class DaySchedule extends Component {
     };
 
     render() {
-        let { viewKey, onViewChanged, sessionsByRoom, dayStartTime, dayEndTime } = this.props;
-        let { singleColumnView, selectedRoomIndex } = this.state;
-        let rooms = Object.keys(sessionsByRoom);
-        if (singleColumnView) {
-            rooms = rooms.slice(selectedRoomIndex, selectedRoomIndex + 1);
-        }
+        let {
+            viewKey,
+            onViewChanged,
+            selectedRoomIndex,
+            getOnRoomChangedHandler,
+            sessionsByRoom,
+            dayStartTime,
+            dayEndTime
+        } = this.props;
+        let { singleColumnView } = this.state;
+        let roomList = Object.keys(sessionsByRoom);
+        let roomsToDisplay = singleColumnView ? roomList.slice(selectedRoomIndex, selectedRoomIndex + 1) : roomList;
 
         return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
             <div>
@@ -58,10 +64,30 @@ export default class DaySchedule extends Component {
                         );
                     })}
                 </Nav>
+                {singleColumnView && (
+                    <div className={classNames("room-selector")}>
+                        <DropdownButton
+                            bsStyle="info"
+                            title={roomList[selectedRoomIndex]}
+                            key={selectedRoomIndex}
+                        >
+                            {roomList.map((room, i) => {
+                                return (
+                                    <MenuItem
+                                        eventKey={i}
+                                        onClick={getOnRoomChangedHandler(i)}
+                                    >
+                                        {room}
+                                    </MenuItem>
+                                );
+                            })}
+                        </DropdownButton>
+                    </div>
+                )}
                 <div>
                     <div className={classNames("room-names")}>
                         <div className={classNames("timeline-placeholder")}/>
-                        {rooms && rooms.map((room) => {
+                        {roomsToDisplay && roomsToDisplay.map((room) => {
                             return (
                                 <div className={classNames("room-name-column")}>
                                     <div className={classNames("room-name", "overflow-text")}>
@@ -77,7 +103,7 @@ export default class DaySchedule extends Component {
                             startTime={dayStartTime}
                             endTime={dayEndTime}
                         />
-                        {rooms && rooms.map((room) => {
+                        {roomsToDisplay && roomsToDisplay.map((room) => {
                             let sessions = sessionsByRoom[room];
                             return (
                                 <div className={classNames("room-calendar-column")}>
@@ -103,6 +129,8 @@ export default class DaySchedule extends Component {
 DaySchedule.propTypes = {
     viewKey: PropTypes.string,
     onViewChanged: PropTypes.func,
+    selectedRoomIndex: PropTypes.number,
+    getOnRoomChangedHandler: PropTypes.func,
     dayStartTime: PropTypes.object,
     dayEndTime: PropTypes.object,
     sessionsByRoom: PropTypes.object,
@@ -110,6 +138,7 @@ DaySchedule.propTypes = {
 
 DaySchedule.defaultProps = {
     viewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
+    selectedRoomIndex: 0,
     dayStartTime: {},
     dayEndTime: {},
     sessionsByRoom: {},
