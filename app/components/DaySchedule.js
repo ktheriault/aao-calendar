@@ -5,6 +5,7 @@ import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
 import ScrollbarSize from "react-scrollbar-size";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
+import SessionModal from "../components/SessionModal";
 import { SCHEDULE_VIEWS } from "../global";
 import "../style/App.css";
 
@@ -16,6 +17,8 @@ export default class DaySchedule extends Component {
             singleColumnView: false,
             selectedRoomIndex: 0,
             scrollbarWidth: 0,
+            showModal: false,
+            sessionInModal: {},
         };
     }
 
@@ -40,6 +43,23 @@ export default class DaySchedule extends Component {
         })
     };
 
+    getOnSessionClickedHandler = (room) => {
+        return (i) => {
+            return () => {
+                this.setState({
+                    sessionInModal: this.props.sessionsByRoom[room][i],
+                    showModal: true,
+                });
+            }
+        }
+    };
+
+    onModalClose = () => {
+        this.setState({
+            showModal: false,
+        });
+    };
+
     updateScreenSize = () => {
         this.setState({
             singleColumnView: window.innerWidth <= 768,
@@ -56,7 +76,7 @@ export default class DaySchedule extends Component {
             dayStartTime,
             dayEndTime
         } = this.props;
-        let { singleColumnView, scrollbarWidth } = this.state;
+        let { singleColumnView, scrollbarWidth, showModal, sessionInModal } = this.state;
         let roomList = Object.keys(sessionsByRoom);
         let roomsToDisplay = singleColumnView ? roomList.slice(selectedRoomIndex, selectedRoomIndex + 1) : roomList;
 
@@ -124,6 +144,7 @@ export default class DaySchedule extends Component {
                                     <RoomSchedule
                                         room={room}
                                         sessions={sessions}
+                                        onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
                                         dayStartTime={dayStartTime}
                                         dayEndTime={dayEndTime}
                                     />
@@ -136,6 +157,11 @@ export default class DaySchedule extends Component {
                         />
                     </div>
                 </div>
+                <SessionModal
+                    isVisible={showModal}
+                    onClose={this.onModalClose}
+                    session={sessionInModal}
+                />
             </div>
         ) : (
             <div>No sessions yet!</div>

@@ -11,7 +11,7 @@ export default class SessionCard extends Component {
     }
 
     render() {
-        let { session, dayStartTime, verticalOffset } = this.props;
+        let { session, onSessionClicked, dayStartTime, verticalOffset } = this.props;
         let startTime = new Date(Date.parse(session.startDateTime));
         let endTime = new Date(Date.parse(session.endDateTime));
         let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
@@ -39,6 +39,7 @@ export default class SessionCard extends Component {
                 } : {
                     top: `${sessionLocationInPixels + verticalOffset}px`
                 }}
+                onClick={onSessionClicked}
             >
                 {speakers.map((speaker) => {
                     let speakerName = `${speaker.firstName} ${speaker.lastName}`;
@@ -63,6 +64,7 @@ export default class SessionCard extends Component {
 
 SessionCard.propTypes = {
     session: PropTypes.object,
+    onSessionClicked: PropTypes.func,
     dayStartTime: PropTypes.object,
     verticalOffset: PropTypes.number,
 };

@@ -12,7 +12,7 @@ export default class RoomSchedule extends Component {
     }
 
     render() {
-        let { sessions, dayStartTime, dayEndTime } = this.props;
+        let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime } = this.props;
         let numberOfHours = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600) + 1;
         let hours = Array.apply(null, Array(numberOfHours)).map((empty, i) => { return i; });
 
@@ -29,10 +29,11 @@ export default class RoomSchedule extends Component {
                         />
                     )
                 })}
-                {sessions && sessions.map((session) => {
+                {sessions && sessions.map((session, i) => {
                     return (
                         <SessionCard
                             session={session}
+                            onSessionClicked={onSessionClickedHandler(i)}
                             dayStartTime={dayStartTime}
                             verticalOffset={verticalOffset}
                         />
@@ -46,6 +47,7 @@ export default class RoomSchedule extends Component {
 
 RoomSchedule.propTypes = {
     sessions: PropTypes.array,
+    onSessionClickedHandler: PropTypes.func,
     dayStartTime: PropTypes.object,
     dayEndTime: PropTypes.object,
 };

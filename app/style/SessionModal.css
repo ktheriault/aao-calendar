@@ -1,0 +1,19 @@
+.modal-section {
+    margin-bottom: 1em;
+}
+
+.modal-indent {
+    margin-left: 1em;
+}
+
+.modal-inline-info {
+    margin-right: 0.5em;
+}
+
+.modal-small-text {
+    font-size: 10px;
+}
+
+.modal-bold-text {
+    font-weight: bold;
+}
