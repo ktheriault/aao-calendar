@@ -12,12 +12,10 @@ export default class RoomSchedule extends Component {
     }
 
     render() {
-        let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime } = this.props;
+        let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime, verticalOffset } = this.props;
         let numberOfHours = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600) + 1;
         let hours = Array.apply(null, Array(numberOfHours)).map((empty, i) => { return i; });
 
-        // TODO Un-hard-code this. Depends on font size of times.
-        let verticalOffset = 10;
         return (
             <div name="RoomSchedule" className={classNames("sessions-container")}>
                 {hours && hours.map((hour, hoursSinceStartTime) => {
@@ -50,6 +48,7 @@ RoomSchedule.propTypes = {
     onSessionClickedHandler: PropTypes.func,
     dayStartTime: PropTypes.object,
     dayEndTime: PropTypes.object,
+    verticalOffset: PropTypes.number,
 };
 
 RoomSchedule.defaultProps = {
