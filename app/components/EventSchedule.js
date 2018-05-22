@@ -12,6 +12,11 @@ export default class EventSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            eventInfo: {},
+            eventDays: [],
+            eventSessions: [],
+            eventSessionsByDay: {},
+            eventSpeakersByID: {},
             selectedDayKey: null,
             selectedViewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
             selectedRoomIndex: 0,
@@ -21,46 +26,28 @@ export default class EventSchedule extends Component {
 
     async componentDidMount() {
         let { eventID } = this.props;
-        let eventData = await api.getEventByID(eventID, false, false, true);
+        let eventData = await api.getEventByID(eventID, false, true, true);
+        eventData = await api.parseEventData(eventData);
+        if (eventData) {
+            let {
+                eventInfo,
+                eventDays,
+                eventSessions,
+                eventSessionsByDay,
+                eventSpeakersByID
+            } = eventData;
 
-        // TODO: Move this to API.
-        let eventInfo = eventData && eventData.event ? {
-            ...eventData.event,
-            startDate: new Date(Date.parse(eventData.event.startDate)),
-            endDate: new Date(Date.parse(eventData.event.endDate))
-        } : null;
+            this.setState({
+                eventInfo: eventInfo,
+                eventDays: eventDays,
+                eventSessions: eventSessions,
+                eventSessionsByDay: eventSessionsByDay,
+                eventSpeakersByID,
+                selectedDayKey: eventDays.length > 0 ? eventDays[0] : null,
+                isLoading: false,
+            });
+        }
 
-        let eventSessions = eventData && eventData.related ? eventData.related.sessions : null;
-        let eventSessionsByDay = {};
-        eventSessions.forEach((session) => {
-            let startDay = (new Date(Date.parse(session.startDateTime))).toDateString();
-            if (eventSessionsByDay[startDay]) {
-                eventSessionsByDay[startDay] = [
-                    ...eventSessionsByDay[startDay],
-                    session,
-                ];
-            } else {
-                eventSessionsByDay[startDay] = [
-                    session,
-                ];
-            }
-        });
-        let eventDays = Object.keys(eventSessionsByDay).map((eventDayString) => {
-            return Date.parse(eventDayString);
-        });
-        eventDays.sort();
-        eventDays = eventDays.map((eventMsString) => {
-            return (new Date(eventMsString)).toDateString();
-        });
-
-        this.setState({
-            eventInfo: eventInfo,
-            eventDays: eventDays,
-            eventSessions: eventSessions,
-            eventSessionsByDay: eventSessionsByDay,
-            selectedDayKey: eventDays.length > 0 ? eventDays[0] : null,
-            isLoading: false,
-        });
     }
 
     onDaySelected = (dayKey) => {
