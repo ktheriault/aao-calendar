@@ -1,10 +1,10 @@
 :root {
-    --hour-height: 96px;
+    --hour-height: 96px; /* Must be first, see global.js */
+    --timeline-font-size: 12px; /* Must be second, see global.js */
     --timeline-width: 5em;
     --column-padding: 0.5em;
     --session-color: #dbfce7;
     --calendar-grid-color: #e4e4e4;
-    --timeline-font-size: 12px;
 }
 
 .app-container {

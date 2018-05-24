@@ -53,7 +53,7 @@ export default class SessionCard extends Component {
         );
 
         return (
-            <OverlayTrigger overlay={tooltip} placement="top">
+            <OverlayTrigger overlay={tooltip} placement="top" delayShow={500}>
             <div
                 name="Session"
                 className={classNames("session-card", heightClass)}
