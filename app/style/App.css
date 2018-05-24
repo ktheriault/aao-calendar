@@ -1,5 +1,5 @@
 :root {
-    --hour-height: 96px; /* Must be first, see global.js */
+    --hour-height: 144px; /* Must be first, see global.js */
     --timeline-font-size: 12px; /* Must be second, see global.js */
     --timeline-width: 5em;
     --column-padding: 0.5em;
@@ -101,7 +101,7 @@
     position: absolute;
     width: 100%;
     padding: 0.5em;
-    overflow: hidden;
+    overflow-x: hidden;
     background: var(--session-color);
 }
 
