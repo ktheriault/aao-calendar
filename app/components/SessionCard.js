@@ -12,6 +12,8 @@ export default class SessionCard extends Component {
 
     render() {
         let { session, onSessionClicked, dayStartTime, verticalOffset } = this.props;
+        let speakers = session.speakers;
+
         let startTime = new Date(Date.parse(session.startDateTime));
         let endTime = new Date(Date.parse(session.endDateTime));
         let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
@@ -20,14 +22,6 @@ export default class SessionCard extends Component {
 
         let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
         let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT / 60;
-
-        let speakers = [];
-        session.sessionParts.forEach((sessionPart) => {
-            speakers = [
-                ...speakers,
-                ...sessionPart.speakers,
-            ];
-        });
 
         return (
             <div

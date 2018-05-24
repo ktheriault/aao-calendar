@@ -73,13 +73,20 @@ export async function parseEventData(eventData) {
 
     let eventSessions = eventData && eventData.related ? eventData.related.sessions : null;
     let eventSessionsByDay = {};
-    await Promise.all(eventSessions.map(async (session, i) => {
+    await Promise.all(eventSessions.map(async (session) => {
         let { speakers } = session.sessionParts[0];
-        let speakersWithSpeakerData = await Promise.all(speakers.map(async (speaker) => {
+        let speakerIDs = speakers.map(speaker => speaker.id);
+        let dedupedSpeakers = speakers.filter((speaker, i) => {
+            return speakerIDs.indexOf(speaker.id) === i;
+        });
+        let speakersWithSpeakerData = await Promise.all(dedupedSpeakers.map(async (speaker) => {
             let speakerID = speaker.id;
             let speakerData = await getSpeakerForEvent(eventID, speakerID);
             return speakerData ? {
                 id: speakerID,
+                firstName: speakerData.firstName,
+                lastName: speakerData.lastName,
+                prefix: speakerData.prefix,
                 fullName: speakerData.fullName,
                 hasFinancialInterest: speakerData.hasFinancialInterest,
                 speakerBio: speakerData.speakerBio,
