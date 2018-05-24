@@ -47,6 +47,4 @@ CSS_CLASS_NAMES.forEach((className) => {
 const ROOT_CSS_TEXT = CSS_RULE_LIST[0].style.cssText;
 const HOUR_HEIGHT = parseInt(ROOT_CSS_TEXT.split(" ")[1]) || 96;
 const TIMELINE_VERTICAL_OFFSET = (parseInt(ROOT_CSS_TEXT.split(" ")[11]) || 12) * (3/4);
-console.log(ROOT_CSS_TEXT.split(" "));
-console.log(TIMELINE_VERTICAL_OFFSET);
 export { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET };

@@ -23,7 +23,8 @@ export default class SessionModal extends Component {
                     learningObjective2,
                     learningObjective3
                 } = sessionParts[0];
-                let learningObjectives = [ learningObjective1, learningObjective2, learningObjective3 ];
+                let learningObjectives = [ learningObjective1, learningObjective2, learningObjective3 ]
+                    .filter((learningObjective) => { return learningObjective});
                 return (
                     <Modal
                         show={isVisible}
@@ -92,7 +93,7 @@ export default class SessionModal extends Component {
                                     </p>
                                 </div>
                             )}
-                            {learningObjectives && learningObjectives.length && (
+                            {learningObjectives && learningObjectives.length > 0 && (
                                 <div className={classNames("modal-section")}>
                                     <h4>Learning Objectives</h4>
                                     <ul>
