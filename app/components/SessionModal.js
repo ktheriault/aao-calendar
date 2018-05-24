@@ -77,6 +77,7 @@ export default class SessionModal extends Component {
                                                         <p>{speakerBio}</p>
                                                     )}
                                                 </div>
+                                                <div className={classNames("modal-clearfix")}/>
                                             </div>
                                         );
                                     })}
