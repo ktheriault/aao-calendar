@@ -67,8 +67,8 @@ export async function parseEventData(eventData) {
 
     let eventInfo = eventData.event ? {
         ...eventData.event,
-        startDate: new Date(Date.parse(eventData.event.startDate)),
-        endDate: new Date(Date.parse(eventData.event.endDate))
+        startDate: new Date(eventData.event.startDate),
+        endDate: new Date(eventData.event.endDate),
     } : null;
 
     let eventSessions = eventData && eventData.related ? eventData.related.sessions : null;
@@ -98,7 +98,7 @@ export async function parseEventData(eventData) {
             speakers: speakersWithSpeakerData,
         };
 
-        let startDay = (new Date(Date.parse(session.startDateTime))).toDateString();
+        let startDay = (new Date(session.startDateTime)).toDateString();
         if (eventSessionsByDay[startDay]) {
             eventSessionsByDay[startDay] = [
                 ...eventSessionsByDay[startDay],

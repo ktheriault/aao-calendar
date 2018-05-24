@@ -14,8 +14,8 @@ export default class SessionCard extends Component {
         let { session, onSessionClicked, dayStartTime, verticalOffset } = this.props;
         let speakers = session.speakers;
 
-        let startTime = new Date(Date.parse(session.startDateTime));
-        let endTime = new Date(Date.parse(session.endDateTime));
+        let startTime = new Date(session.startDateTime);
+        let endTime = new Date(session.endDateTime);
         let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
         let heightClass = `time-block-${lengthInMinutes}`;
         let heightClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];

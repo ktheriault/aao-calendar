@@ -138,7 +138,7 @@ export default class EventSchedule extends Component {
                     {eventDays.map((eventDay, i) => {
                         return (
                             <NavItem key={eventDay} eventKey={eventDay}>
-                                {(new Date(Date.parse(eventDay)).toDateString())}
+                                {new Date(eventDay).toDateString()}
                             </NavItem>
                         );
                     })}
