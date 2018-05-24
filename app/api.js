@@ -73,19 +73,36 @@ export async function parseEventData(eventData) {
 
     let eventSessions = eventData && eventData.related ? eventData.related.sessions : null;
     let eventSessionsByDay = {};
-    eventSessions.forEach((session) => {
+    await Promise.all(eventSessions.map(async (session, i) => {
+        let { speakers } = session.sessionParts[0];
+        let speakersWithSpeakerData = await Promise.all(speakers.map(async (speaker) => {
+            let speakerID = speaker.id;
+            let speakerData = await getSpeakerForEvent(eventID, speakerID);
+            return speakerData ? {
+                id: speakerID,
+                fullName: speakerData.fullName,
+                hasFinancialInterest: speakerData.hasFinancialInterest,
+                speakerBio: speakerData.speakerBio,
+                pictureURL: speakerData.pictureUrl,
+            } : speaker;
+        }));
+        let sessionWithSpeakerData = {
+            ...session,
+            speakers: speakersWithSpeakerData,
+        };
+
         let startDay = (new Date(Date.parse(session.startDateTime))).toDateString();
         if (eventSessionsByDay[startDay]) {
             eventSessionsByDay[startDay] = [
                 ...eventSessionsByDay[startDay],
-                session,
+                sessionWithSpeakerData,
             ];
         } else {
             eventSessionsByDay[startDay] = [
-                session,
+                sessionWithSpeakerData,
             ];
         }
-    });
+    }));
     let eventDays = Object.keys(eventSessionsByDay).map((eventDayString) => {
         return Date.parse(eventDayString);
     });
@@ -94,29 +111,11 @@ export async function parseEventData(eventData) {
         return (new Date(eventMsString)).toDateString();
     });
 
-    let eventSpeakers = eventData.related.speakers;
-    let eventSpeakersByID = {};
-    await eventSpeakers.forEach(async (speaker) => {
-        let speakerID = speaker.id;
-        // speakerBio and pictureURL are only in /events/{eventID}/speakers/{speakerID}, not /events/{eventID}?Include=Speakers
-        let speakerData = await getSpeakerForEvent(eventID, speakerID);
-        if (speakerData) {
-            eventSpeakersByID[speakerID] = {
-                id: speakerID,
-                fullName: speakerData.fullName,
-                hasFinancialInterest: speakerData.hasFinancialInterest,
-                speakerBio: speakerData.speakerBio,
-                pictureURL: speakerData.pictureURL,
-            }
-        }
-    });
-
     return {
         eventInfo,
         eventDays,
         eventSessions,
         eventSessionsByDay,
-        eventSpeakersByID,
     };
 
 }

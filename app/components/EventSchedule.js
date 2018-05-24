@@ -16,7 +16,6 @@ export default class EventSchedule extends Component {
             eventDays: [],
             eventSessions: [],
             eventSessionsByDay: {},
-            eventSpeakersByID: {},
             selectedDayKey: null,
             selectedViewKey: SCHEDULE_VIEWS.FOR_DOCTORS.key,
             selectedRoomIndex: 0,
@@ -34,7 +33,6 @@ export default class EventSchedule extends Component {
                 eventDays,
                 eventSessions,
                 eventSessionsByDay,
-                eventSpeakersByID
             } = eventData;
 
             this.setState({
@@ -42,7 +40,6 @@ export default class EventSchedule extends Component {
                 eventDays: eventDays,
                 eventSessions: eventSessions,
                 eventSessionsByDay: eventSessionsByDay,
-                eventSpeakersByID,
                 selectedDayKey: eventDays.length > 0 ? eventDays[0] : null,
                 isLoading: false,
             });
@@ -88,6 +85,7 @@ export default class EventSchedule extends Component {
             );
         }
 
+        // TODO Move to API.
         let daySessions = eventSessionsByDay[selectedDayKey];
         let visibleDaySessions = daySessions.filter((session) => {
             return session[selectedViewKey];

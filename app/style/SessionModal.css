@@ -1,5 +1,13 @@
-.modal-section {
+.modal-section-title {
     margin-bottom: 1em;
+}
+
+.modal-section {
+    margin-bottom: 2em;
+}
+
+.modal-subsection {
+    margin-bottom: 2em;
 }
 
 .modal-indent {
@@ -16,4 +24,22 @@
 
 .modal-bold-text {
     font-weight: bold;
+}
+
+.modal-inline-item {
+    margin-right: 0.5em;
+    display: inline-block;
+}
+
+.modal-float-item {
+    float: left;
+    margin-right: 1em;
+}
+
+.modal-clearfix {
+    clear: both;
+}
+
+.modal-image {
+    max-width: 100px;
 }

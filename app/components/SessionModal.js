@@ -13,11 +13,10 @@ export default class SessionModal extends Component {
     render() {
         let { isVisible, onClose, session } = this.props;
         if (session && Object.keys(session).length > 0) {
-            let { title, credits, fee, startDateTime, endDateTime, sessionParts } = session;
+            let { title, credits, fee, startDateTime, endDateTime, speakers, sessionParts } = session;
             let sessionLength = (Date.parse(endDateTime) - Date.parse(startDateTime)) / 1000 / 60;
             if (sessionParts && sessionParts.length > 0) {
                 let {
-                    speakers,
                     description,
                     learningObjective1,
                     learningObjective2,
@@ -33,37 +32,54 @@ export default class SessionModal extends Component {
                             <Modal.Title>{title}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            {(credits || sessionLength) && (
-                                <div>
-                                    {credits && (
-                                        <span className={classNames("modal-inline-info")}>
-                                            <Badge>{`${credits} CE`}</Badge>
-                                        </span>
-                                    )}
-                                    {sessionLength && <span>{`${sessionLength} minutes`}</span>}
-                                </div>
-                            )}
-                            {fee && (
-                                <div className={classNames("modal-section")}>
-                                    <span className={classNames("modal-bold-text")}>Fee</span>{`: ${fee}`}
-                                </div>
-                            )}
+                            <div className={classNames("modal-section")}>
+                                {(credits || sessionLength) && (
+                                    <div>
+                                        {credits && (
+                                            <div className={classNames("modal-inline-item")}>
+                                                <Badge>{`${credits} CE`}</Badge>
+                                            </div>
+                                        )}
+                                        {sessionLength && (
+                                            <div className={classNames("modal-inline-item")}>
+                                                {`${sessionLength} minutes`}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                                {fee && (
+                                    <div>
+                                        <span className={classNames("modal-bold-text")}>Fee</span>{`: ${fee}`}
+                                    </div>
+                                )}
+                            </div>
                             {speakers && (
                                 <div className={classNames("modal-section")}>
-                                    <h4>Speakers</h4>
+                                    <h4 className={classNames("modal-section-title")}>Speakers</h4>
                                     {speakers.map((speaker) => {
-                                        let { fullName, hasFinancialInterest } = speaker;
+                                        let { fullName, hasFinancialInterest, speakerBio, pictureURL } = speaker;
                                         return (
-                                            <div className={classNames("modal-indent")}>
-                                                <h5>{fullName}</h5>
-                                                {hasFinancialInterest && (
-                                                    <p className={classNames("modal-small-text")}>
-                                                        * Has financial interest
-                                                    </p>
-                                                )}
+                                            <div className={classNames("modal-indent", "modal-subsection")}>
+                                                <div className={classNames("modal-float-item")}>
+                                                    {pictureURL && (
+                                                        <img src={pictureURL} className={classNames("modal-image")}/>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h5>{fullName}</h5>
+                                                    {hasFinancialInterest && (
+                                                        <p className={classNames("modal-small-text")}>
+                                                            * Has financial interest
+                                                        </p>
+                                                    )}
+                                                    {speakerBio && (
+                                                        <p>{speakerBio}</p>
+                                                    )}
+                                                </div>
                                             </div>
                                         );
                                     })}
+                                    <div className={classNames("modal-clearfix")}/>
                                 </div>
                             )}
                             {description && (

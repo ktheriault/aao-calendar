@@ -46,8 +46,9 @@ export default class DaySchedule extends Component {
     getOnSessionClickedHandler = (room) => {
         return (i) => {
             return () => {
+                let sessionInModal = this.props.sessionsByRoom[room][i];
                 this.setState({
-                    sessionInModal: this.props.sessionsByRoom[room][i],
+                    sessionInModal: sessionInModal,
                     showModal: true,
                 });
             }
