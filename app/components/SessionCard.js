@@ -16,6 +16,14 @@ export default class SessionCard extends Component {
 
         let startTime = new Date(session.startDateTime);
         let endTime = new Date(session.endDateTime);
+
+        let startTimeHours = startTime.getHours();
+        let endTimeHours = endTime.getHours();
+        let startTimeMinutes = startTime.getMinutes();
+        let endTimeMinutes = endTime.getMinutes();
+        let startTimeString = `${startTimeHours > 12 ? startTimeHours - 12 : startTimeHours}:${startTimeMinutes < 10 ? `0${startTimeMinutes}` : startTimeMinutes}${startTimeHours > 11 ? "pm" : "am"}`;
+        let endTimeString = `${endTimeHours > 12 ? endTimeHours - 12 : endTimeHours}:${endTimeMinutes < 10 ? `0${endTimeMinutes}` : endTimeMinutes}${endTimeHours > 11 ? "pm" : "am"}`;
+
         let lengthInMinutes = (Date.parse(endTime) - Date.parse(startTime)) / 1000 / 60;
         let heightClass = `time-block-${lengthInMinutes}`;
         let heightClassExists = !!CSS_CLASS_DICTIONARY[`.${heightClass}`];
@@ -48,7 +56,7 @@ export default class SessionCard extends Component {
                     {session.title}
                 </div>
                 <div className={classNames("overflow-text", "session-time-text")}>
-                    {`${startTime.toLocaleTimeString()} - ${endTime.toLocaleTimeString()}`}
+                    {`${startTimeString} - ${endTimeString}`}
                 </div>
             </div>
         )

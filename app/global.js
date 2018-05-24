@@ -11,6 +11,31 @@ export const SCHEDULE_VIEWS = {
     },
 };
 
+export const ABBR_MONTHS = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
+export const ABBR_DAYS = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+];
+
 // CSS information for dynamic styling if the CSS class doesn't exist
 import "./style/App.css";
 let CSS_RULE_LIST = document.styleSheets[1].cssRules;

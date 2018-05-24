@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { Nav, NavItem } from "react-bootstrap";
 import DaySchedule from "../components/DaySchedule";
 import * as api from "../api";
-import { SCHEDULE_VIEWS } from "../global";
+import { SCHEDULE_VIEWS, ABBR_MONTHS, ABBR_DAYS } from "../global";
 import "../style/App.css";
 
 export default class EventSchedule extends Component {
@@ -135,10 +135,12 @@ export default class EventSchedule extends Component {
                     activeKey={selectedDayKey}
                     onSelect={this.onDaySelected}
                 >
-                    {eventDays.map((eventDay, i) => {
+                    {eventDays.map((eventDay) => {
+                        let date = new Date(eventDay);
+                        let dateString = `${ABBR_DAYS[date.getDay()]}, ${ABBR_MONTHS[date.getMonth()]} ${date.getDate()}`
                         return (
                             <NavItem key={eventDay} eventKey={eventDay}>
-                                {new Date(eventDay).toDateString()}
+                                {dateString}
                             </NavItem>
                         );
                     })}
