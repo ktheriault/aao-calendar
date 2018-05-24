@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
 import "../style/App.css";
 
@@ -31,7 +32,28 @@ export default class SessionCard extends Component {
         let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
         let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT / 60;
 
+        let tooltip = (
+            <Tooltip>
+                {speakers.map((speaker) => {
+                    let speakerName = `${speaker.firstName} ${speaker.lastName}`;
+                    if (speaker.prefix) { speakerName = `${speaker.prefix} ${speakerName}`; }
+                    return (
+                        <div className={classNames("session-speaker-text")}>
+                            {speakerName}
+                        </div>
+                    )
+                })}
+                <div className={classNames("session-title-text")}>
+                    {session.title}
+                </div>
+                <div className={classNames("session-time-text")}>
+                    {`${startTimeString} - ${endTimeString}`}
+                </div>
+            </Tooltip>
+        );
+
         return (
+            <OverlayTrigger overlay={tooltip} placement="top">
             <div
                 name="Session"
                 className={classNames("session-card", heightClass)}
@@ -59,6 +81,7 @@ export default class SessionCard extends Component {
                     {`${startTimeString} - ${endTimeString}`}
                 </div>
             </div>
+            </OverlayTrigger>
         )
     }
 
