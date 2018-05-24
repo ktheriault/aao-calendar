@@ -104,8 +104,6 @@ export default class EventSchedule extends Component {
                 ];
             }
         });
-        let rooms = Object.keys(visibleDaySessionsByRoom);
-        rooms.sort();
 
         // TODO Calculate this.
         let dayStartTime = null;
