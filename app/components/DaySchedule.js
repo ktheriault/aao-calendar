@@ -6,7 +6,7 @@ import ScrollbarSize from "react-scrollbar-size";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import SessionModal from "../components/SessionModal";
-import { SCHEDULE_VIEWS, HOUR_HEIGHT } from "../global";
+import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
 import "../style/App.css";
 
 export default class DaySchedule extends Component {
@@ -81,15 +81,12 @@ export default class DaySchedule extends Component {
         let roomList = Object.keys(sessionsByRoom);
         let roomsToDisplay = singleColumnView ? roomList.slice(selectedRoomIndex, selectedRoomIndex + 1) : roomList;
 
-        // TODO Un-hard-code verticalOffset. Depends on font size of times.
-        let verticalOffset = 10;
-        let calendarHeight = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600 * HOUR_HEIGHT) + verticalOffset;
+        let calendarHeight = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600 * HOUR_HEIGHT) + TIMELINE_VERTICAL_OFFSET;
 
         return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
             <div>
                 <Nav
                     bsStyle="tabs"
-                    className={classNames("day-schedule-filters")}
                     activeKey={viewKey}
                     onSelect={onViewChanged}
                 >
@@ -155,7 +152,6 @@ export default class DaySchedule extends Component {
                                         onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
                                         dayStartTime={dayStartTime}
                                         dayEndTime={dayEndTime}
-                                        verticalOffset={verticalOffset}
                                     />
                                 </div>
                             );

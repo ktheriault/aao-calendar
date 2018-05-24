@@ -4,6 +4,7 @@
     --column-padding: 0.5em;
     --session-color: #dbfce7;
     --calendar-grid-color: #e4e4e4;
+    --timeline-font-size: 12px;
 }
 
 .app-container {
@@ -26,10 +27,6 @@
 
 .event-day-selector {
     margin-bottom: 1em;
-}
-
-.day-schedule-filters {
-    margin-bottom: 0.5em;
 }
 
 .room-names {
@@ -66,6 +63,8 @@
 .room-name {
     height: 2em;
     margin: 0.5em 0;
+    padding: 0.25em 0; /* vertical centering */
+    text-align: center;
 }
 
 .timeline-placeholder {
@@ -85,6 +84,7 @@
     position: absolute;
     width: 100%;
     text-align: center;
+    font-size: var(--timeline-font-size);
 }
 
 .hour-rule {

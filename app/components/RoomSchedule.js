@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import SessionCard from "../components/SessionCard";
-import { HOUR_HEIGHT } from "../global";
+import { HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
 import "../style/App.css";
 
 export default class RoomSchedule extends Component {
@@ -12,7 +12,7 @@ export default class RoomSchedule extends Component {
     }
 
     render() {
-        let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime, verticalOffset } = this.props;
+        let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime } = this.props;
         let numberOfHours = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600) + 1;
         let hours = Array.apply(null, Array(numberOfHours)).map((empty, i) => { return i; });
 
@@ -23,7 +23,7 @@ export default class RoomSchedule extends Component {
                     return (
                         <hr
                             className={classNames("hour-rule")}
-                            style={{ top: `${timeLocationInPixels + verticalOffset}px` }}
+                            style={{ top: `${timeLocationInPixels + TIMELINE_VERTICAL_OFFSET}px` }}
                         />
                     )
                 })}
@@ -33,7 +33,6 @@ export default class RoomSchedule extends Component {
                             session={session}
                             onSessionClicked={onSessionClickedHandler(i)}
                             dayStartTime={dayStartTime}
-                            verticalOffset={verticalOffset}
                         />
                     );
                 })}
@@ -48,7 +47,6 @@ RoomSchedule.propTypes = {
     onSessionClickedHandler: PropTypes.func,
     dayStartTime: PropTypes.object,
     dayEndTime: PropTypes.object,
-    verticalOffset: PropTypes.number,
 };
 
 RoomSchedule.defaultProps = {

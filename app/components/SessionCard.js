@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { CSS_CLASS_DICTIONARY, HOUR_HEIGHT } from "../global";
+import { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
 import "../style/App.css";
 
 export default class SessionCard extends Component {
@@ -11,7 +11,7 @@ export default class SessionCard extends Component {
     }
 
     render() {
-        let { session, onSessionClicked, dayStartTime, verticalOffset } = this.props;
+        let { session, onSessionClicked, dayStartTime } = this.props;
         let speakers = session.speakers;
 
         let startTime = new Date(session.startDateTime);
@@ -37,9 +37,9 @@ export default class SessionCard extends Component {
                 className={classNames("session-card", heightClass)}
                 style={!heightClassExists ? {
                     height: `${lengthInMinutes / 60 * HOUR_HEIGHT}px`,
-                    top: `${sessionLocationInPixels + verticalOffset}px`,
+                    top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`,
                 } : {
-                    top: `${sessionLocationInPixels + verticalOffset}px`
+                    top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`
                 }}
                 onClick={onSessionClicked}
             >
@@ -68,5 +68,4 @@ SessionCard.propTypes = {
     session: PropTypes.object,
     onSessionClicked: PropTypes.func,
     dayStartTime: PropTypes.object,
-    verticalOffset: PropTypes.number,
 };
