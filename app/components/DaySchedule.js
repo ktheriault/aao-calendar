@@ -79,6 +79,7 @@ export default class DaySchedule extends Component {
         } = this.props;
         let { singleColumnView, scrollbarWidth, showModal, sessionInModal } = this.state;
         let roomList = Object.keys(sessionsByRoom);
+        roomList.sort();
         let roomsToDisplay = singleColumnView ? roomList.slice(selectedRoomIndex, selectedRoomIndex + 1) : roomList;
 
         let calendarHeight = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600 * HOUR_HEIGHT) + TIMELINE_VERTICAL_OFFSET;
