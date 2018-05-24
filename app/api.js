@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { SCHEDULE_VIEWS } from "./global";
 
 const baseURL = "http://nf.aaoinfo.org/mapi/api/";
 const eventEndpoint = "events";
@@ -65,12 +66,6 @@ export async function parseEventData(eventData) {
 
     let eventID = eventData.event.id;
 
-    let eventInfo = eventData.event ? {
-        ...eventData.event,
-        startDate: new Date(eventData.event.startDate),
-        endDate: new Date(eventData.event.endDate),
-    } : null;
-
     let eventSessions = eventData && eventData.related ? eventData.related.sessions : null;
     let eventSessionsByDay = {};
     await Promise.all(eventSessions.map(async (session) => {
@@ -110,6 +105,61 @@ export async function parseEventData(eventData) {
             ];
         }
     }));
+
+    let eventSessionsByDayAndViewKey = {};
+    Object.keys(eventSessionsByDay).map((startDay) => {
+        eventSessionsByDayAndViewKey[startDay] = {};
+        let sessionsForDay = eventSessionsByDay[startDay];
+        Object.keys(SCHEDULE_VIEWS).forEach((view) => {
+            let viewKey = SCHEDULE_VIEWS[view].key;
+            let sessionsForDayAndView = sessionsForDay.filter((session) => {
+                return session[viewKey];
+            });
+
+            let dayStartTime = new Date(sessionsForDayAndView[0].startDateTime);
+            let dayEndTime = new Date(sessionsForDayAndView[0].endDateTime);
+
+            let sessionsByRoom = {};
+            sessionsForDayAndView.forEach((session) => {
+                let roomName = session.roomNumber;
+                if (sessionsByRoom[roomName]) {
+                    sessionsByRoom[roomName] = [
+                        ...sessionsByRoom[roomName],
+                        session,
+                    ];
+                } else {
+                    sessionsByRoom[roomName] = [
+                        session
+                    ];
+                }
+
+                let startTime = new Date(session.startDateTime);
+                let endTime = new Date(session.endDateTime);
+                if (startTime < dayStartTime) {
+                    dayStartTime = startTime;
+                }
+                if (endTime > dayEndTime) {
+                    dayEndTime = endTime;
+                }
+
+            });
+
+            if (dayStartTime.getMinutes() !== 0) {
+                dayStartTime.setMinutes(0);
+            }
+            if (dayEndTime.getMinutes() !== 0) {
+                dayEndTime.setHours(dayEndTime.getHours() + 1);
+                dayEndTime.setMinutes(0);
+            }
+
+            eventSessionsByDayAndViewKey[startDay][viewKey] = {};
+            eventSessionsByDayAndViewKey[startDay][viewKey].sessions = sessionsByRoom;
+            eventSessionsByDayAndViewKey[startDay][viewKey].dayStartTime = dayStartTime;
+            eventSessionsByDayAndViewKey[startDay][viewKey].dayEndTime = dayEndTime;
+        });
+    });
+
+
     let eventDays = Object.keys(eventSessionsByDay).map((eventDayString) => {
         return Date.parse(eventDayString);
     });
@@ -119,10 +169,8 @@ export async function parseEventData(eventData) {
     });
 
     return {
-        eventInfo,
         eventDays,
-        eventSessions,
-        eventSessionsByDay,
+        parsedEventSessions: eventSessionsByDayAndViewKey,
     };
 
 }

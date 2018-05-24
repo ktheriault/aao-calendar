@@ -37,7 +37,7 @@
 .room-schedules {
     display: flex;
     justify-content: space-between;
-    height: 30em;
+    height: 35em;
     overflow-y: scroll;
 }
 
