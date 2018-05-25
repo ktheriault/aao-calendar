@@ -1,7 +1,7 @@
 import $ from "jquery";
 import { SCHEDULE_VIEWS } from "./global";
 
-const baseURL = "http://nf.aaoinfo.org/mapi/api/";
+const baseURL = "http://nf.aaoinfo.org/mapi/api";
 const eventEndpoint = "events";
 const speakerEndpoint = "speakers";
 
