@@ -1,5 +1,12 @@
 # aao-calendar
 
+How to run local version:
+npm run start
+
+How to run local version of what runs on Heroku:
+npm run build
+node server.js
+
 How to deploy to Heroku:
 git push heroku master
 
