@@ -5,15 +5,6 @@ const baseURL = "http://nf.aaoinfo.org/mapi/api";
 const eventEndpoint = "events";
 const speakerEndpoint = "speakers";
 
-export async function getEventList() {
-    let url = `${baseURL}/${eventEndpoint}`;
-    let response = await $.ajax({
-        type: "GET",
-        url: url,
-    });
-    return response ? response : null;
-}
-
 export async function getEventByID(
     eventID,
     includeSponsors=false,
