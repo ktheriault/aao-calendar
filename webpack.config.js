@@ -6,7 +6,7 @@ var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 module.exports = {
-    entry: __dirname + '/app/index.js',
+    entry: ["babel-polyfill", __dirname + '/app/index.js'],
     devtool: "source-map",
     module: {
         rules: [

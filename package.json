@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ktheriault/aao-calendar#readme",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "jquery": "^3.3.1",
     "prop-types": "^15.6.1",
