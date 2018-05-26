@@ -277,12 +277,12 @@ export default class DaySchedule extends React.Component {
                                 );
                             })}
                         */}
-                        {/*
+                        {
                             <ScrollbarSize
                                 onLoad={this.onScrollbarLoad}
                                 onChange={this.onScrollbarChange}
                             />
-                        */}
+                        }
                     </div>
                 </div>
                 {/*
