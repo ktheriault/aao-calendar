@@ -11,14 +11,7 @@ export default class SessionModal extends React.Component {
         super(props);
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log("SessionModal error");
-        console.log(error);
-        console.log(errorInfo.componentStack);
-    }
-
     render() {
-        console.log("SessionModal.render start");
         let { isVisible, onClose, session } = this.props;
         if (session && Object.keys(session).length > 0) {
             let { title, credits, fee, startDateTime, endDateTime, speakers, sessionParts } = session;
@@ -32,7 +25,6 @@ export default class SessionModal extends React.Component {
                 } = sessionParts[0];
                 let learningObjectives = [ learningObjective1, learningObjective2, learningObjective3 ]
                     .filter((learningObjective) => { return learningObjective});
-                console.log("SessionModal.render modal");
                 return (
                     <Modal
                         show={isVisible}
@@ -119,7 +111,6 @@ export default class SessionModal extends React.Component {
                 );
             }
         }
-        console.log("SessionModal.render null");
         return null;
     }
 }

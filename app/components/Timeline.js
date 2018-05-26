@@ -10,14 +10,7 @@ export default class Timeline extends React.Component {
         super(props);
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log("Timeline error");
-        console.log(error);
-        console.log(errorInfo.componentStack);
-    }
-
     render() {
-        console.log("Timeline.render");
         let { startTime, endTime } = this.props;
         let startHour = startTime.getHours();
         let numberOfHours = ((Date.parse(endTime) - Date.parse(startTime)) / 1000 / 3600) + 1;

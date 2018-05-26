@@ -21,14 +21,6 @@ export default class DaySchedule extends React.Component {
         };
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log("DaySchedule error");
-        console.log(error);
-        console.log(typeof error);
-        console.log(Object.keys(error));
-        console.log(error.stack ? error.stack : null);
-    }
-
     componentDidMount() {
         this.updateScreenSize();
         window.addEventListener('resize', this.updateScreenSize);
@@ -66,7 +58,6 @@ export default class DaySchedule extends React.Component {
     };
 
     render() {
-        console.log("DaySchedule.render");
         let {
             viewKey,
             onViewChanged,
@@ -83,7 +74,6 @@ export default class DaySchedule extends React.Component {
 
         let calendarHeight = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600 * HOUR_HEIGHT) + TIMELINE_VERTICAL_OFFSET;
 
-        console.log("DaySchedule.render done with calculations");
 
         return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
             <div>
@@ -171,93 +161,6 @@ export default class DaySchedule extends React.Component {
         ) : (
             <div>No sessions yet!</div>
         );
-
-        /*
-        return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
-            <div>
-                <Nav
-                    bsStyle="tabs"
-                    activeKey={viewKey}
-                    onSelect={onViewChanged}
-                >
-                    {Object.keys(SCHEDULE_VIEWS).map((scheduleView) => {
-                        let scheduleViewKey = SCHEDULE_VIEWS[scheduleView].key;
-                        let scheduleViewTitle = SCHEDULE_VIEWS[scheduleView].title;
-                        return (
-                            <NavItem key={scheduleViewKey} eventKey={scheduleViewKey}>
-                                {scheduleViewTitle}
-                            </NavItem>
-                        );
-                    })}
-                </Nav>
-                {singleColumnView && (
-                    <div className={classNames("room-selector")}>
-                        <DropdownButton
-                            bsStyle="info"
-                            title={roomList[selectedRoomIndex]}
-                            key={selectedRoomIndex}
-                        >
-                            {roomList.map((room, i) => {
-                                return (
-                                    <MenuItem
-                                        eventKey={i}
-                                        onClick={getOnRoomChangedHandler(i)}
-                                    >
-                                        {room}
-                                    </MenuItem>
-                                );
-                            })}
-                        </DropdownButton>
-                    </div>
-                )}
-                <div>
-                    <div className={classNames("room-names")}>
-                        <div className={classNames("timeline-placeholder")}/>
-                        {roomsToDisplay && roomsToDisplay.map((room) => {
-                            return (
-                                <div className={classNames("room-name-column")}>
-                                    <div className={classNames("room-name", "overflow-text")}>
-                                        {room}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                        <div style={{ width: `${scrollbarWidth}px` }}/>
-                    </div>
-                    <div className={classNames("room-schedules")}>
-                        <Timeline
-                            startTime={dayStartTime}
-                            endTime={dayEndTime}
-                        />
-                        {roomsToDisplay && roomsToDisplay.map((room) => {
-                            let sessions = sessionsByRoom[room];
-                            return (
-                                <div
-                                    className={classNames("room-calendar-column")}
-                                    style={{ height: `${calendarHeight}px` }}
-                                >
-                                    <RoomSchedule
-                                        room={room}
-                                        sessions={sessions}
-                                        onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
-                                        dayStartTime={dayStartTime}
-                                        dayEndTime={dayEndTime}
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-                <SessionModal
-                    isVisible={showModal}
-                    onClose={this.onModalClose}
-                    session={sessionInModal}
-                />
-            </div>
-        ) : (
-            <div>No sessions yet!</div>
-        );
-        */
     }
 
 }

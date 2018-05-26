@@ -1,3 +1,9 @@
+/*
+Changing these variables should work in every browser but IE.
+IE doesn't recognize variables so you have to set them manually.
+    E.g. search for attributes that use "--hour-height" and change the corresponding attributes that say "For IE".
+global.js also sets some default values if it can't parse the CSS, so change those too.
+*/
 :root {
     --hour-height: 144px; /* Must be first, see global.js */
     --timeline-font-size: 12px; /* Must be second, see global.js */
@@ -43,6 +49,7 @@
     -ms-flex-pack: justify; /* For IE */
     height: 35em;
     overflow-y: scroll;
+    overflow-x: hidden; /* For IE */
 }
 
 .room-name-column {
