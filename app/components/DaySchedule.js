@@ -267,13 +267,13 @@ export default class DaySchedule extends React.Component {
                         })}
                     </div>
                 </div>
-                {/*
+                {
                     <SessionModal
                         isVisible={showModal}
                         onClose={this.onModalClose}
                         session={sessionInModal}
                     />
-                */}
+                }
             </div>
         ) : (
             <div>No sessions yet!</div>
