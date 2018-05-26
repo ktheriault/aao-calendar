@@ -30,10 +30,8 @@ export default class DaySchedule extends React.Component {
     }
 
     componentDidMount() {
-        console.log("DaySchedule.componentDidMount start");
         this.updateScreenSize();
         window.addEventListener('resize', this.updateScreenSize);
-        console.log("DaySchedule.componentDidMount end");
         this.setState({
             scrollbarWidth: getScrollbarWidth(),
         })
@@ -65,7 +63,6 @@ export default class DaySchedule extends React.Component {
         this.setState({
             singleColumnView: window.innerWidth <= 768,
         });
-        console.log("updateScreenSize:", window.innerWidth);
     };
 
     render() {
@@ -87,110 +84,6 @@ export default class DaySchedule extends React.Component {
         let calendarHeight = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600 * HOUR_HEIGHT) + TIMELINE_VERTICAL_OFFSET;
 
         console.log("DaySchedule.render done with calculations");
-
-        /*
-        if (sessionsByRoom && Object.keys(sessionsByRoom).length > 0) {
-            let scheduleViews = Object.keys(SCHEDULE_VIEWS).map((scheduleView) => {
-                let scheduleViewKey = SCHEDULE_VIEWS[scheduleView].key;
-                let scheduleViewTitle = SCHEDULE_VIEWS[scheduleView].title;
-                return (
-                    <NavItem key={scheduleViewKey} eventKey={scheduleViewKey}>
-                        {scheduleViewTitle}
-                    </NavItem>
-                );
-            });
-            console.log("DaySchedule.render done with scheduleViews");
-            let nav = (
-                <Nav
-                    bsStyle="tabs"
-                    activeKey={viewKey}
-                    onSelect={onViewChanged}
-                >
-                    {scheduleViews}
-                </Nav>
-            );
-            console.log("DaySchedule.render done with nav");
-
-            let roomNames = roomsToDisplay && roomsToDisplay.map((room) => {
-                return (
-                    <div className={classNames("room-name-column")}>
-                        <div className={classNames("room-name", "overflow-text")}>
-                            {room}
-                        </div>
-                    </div>
-                );
-            });
-            console.log("DaySchedule.render done with roomNames");
-
-            let timeline = (
-                <Timeline
-                    startTime={dayStartTime}
-                    endTime={dayEndTime}
-                />
-            );
-            console.log("DaySchedule.render done with timeline");
-            let roomSessions = roomsToDisplay && roomsToDisplay.map((room) => {
-                let sessions = sessionsByRoom[room];
-                return (
-                    <div
-                        className={classNames("room-calendar-column")}
-                        style={{ height: `${calendarHeight}px` }}
-                    >
-                        <RoomSchedule
-                            room={room}
-                            sessions={sessions}
-                            onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
-                            dayStartTime={dayStartTime}
-                            dayEndTime={dayEndTime}
-                        />
-                    </div>
-                );
-            });
-            console.log("DaySchedule.render done with roomSessions");
-            let scrollbar = (
-                <ScrollbarSize
-                    onLoad={this.onScrollbarLoad}
-                    onChange={this.onScrollbarChange}
-                />
-            );
-            console.log("DaySchedule.render done with scrollbar");
-            let roomSchedules = (
-                <div>
-                    {timeline}
-                    {roomSessions}
-                    {scrollbar}
-                </div>
-            );
-            console.log("DaySchedule.render done with roomSchedules");
-
-            let roomCalendar = (
-                <div>
-                    {roomNames}
-                    {roomSchedules}
-                </div>
-            );
-            console.log("DaySchedule.render done with roomCalendar");
-
-            let modal = (
-                <SessionModal
-                    isVisible={showModal}
-                    onClose={this.onModalClose}
-                    session={sessionInModal}
-                />
-            );
-            console.log("DaySchedule.render done with modal");
-
-            let daySchedule = (
-                <div>
-                    {nav}
-                    {roomCalendar}
-                    {modal}
-                </div>
-            )
-            console.log("DaySchedule.render done with daySchedule");
-
-        }
-        */
 
         return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
             <div>

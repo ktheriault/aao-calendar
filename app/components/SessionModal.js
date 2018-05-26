@@ -68,6 +68,7 @@ export default class SessionModal extends React.Component {
                                     <h4 className={classNames("modal-section-title")}>Speakers</h4>
                                     {speakers.map((speaker) => {
                                         let { fullName, hasFinancialInterest, speakerBio, pictureURL } = speaker;
+                                        console.log(pictureURL);
                                         return (
                                             <div className={classNames("modal-indent", "modal-subsection")}>
                                                 <div className={classNames("modal-float-item")}>

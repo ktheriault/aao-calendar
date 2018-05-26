@@ -11,12 +11,6 @@ export default class SessionCard extends React.Component {
         super(props);
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log("SessionCard error");
-        console.log(error);
-        console.log(errorInfo.componentStack);
-    }
-
     render() {
         console.log("SessionCard.render");
         let { session, onSessionClicked, dayStartTime } = this.props;

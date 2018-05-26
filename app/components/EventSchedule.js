@@ -21,12 +21,6 @@ export default class EventSchedule extends React.Component {
         }
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log("EventSchedule error");
-        console.log(error);
-        console.log(errorInfo.componentStack);
-    }
-
     async componentDidMount() {
         let { eventID } = this.props;
         let eventData = await api.getEventByID(eventID, false, true, true);
@@ -65,7 +59,6 @@ export default class EventSchedule extends React.Component {
     };
 
     render() {
-        console.log("EventSchedule.render");
         let {
             selectedDayKey,
             selectedViewKey,
