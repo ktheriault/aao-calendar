@@ -12,7 +12,7 @@ export default class SessionCard extends React.Component {
     }
 
     render() {
-        console.log("SessionCard.render");
+        console.log("SessionCard.render start");
         let { session, onSessionClicked, dayStartTime } = this.props;
         let speakers = session.speakers;
 
@@ -32,6 +32,7 @@ export default class SessionCard extends React.Component {
 
         let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
         let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT / 60;
+        console.log("SessionCard.render done with time");
 
         let tooltip = (
             <Tooltip>
@@ -52,8 +53,9 @@ export default class SessionCard extends React.Component {
                 </div>
             </Tooltip>
         );
+        console.log("SessionCard.render done with tooltip");
 
-        return (
+        let returnValue = (
             <OverlayTrigger overlay={tooltip} placement="top" delayShow={500}>
             <div
                 name="Session"
@@ -83,7 +85,9 @@ export default class SessionCard extends React.Component {
                 </div>
             </div>
             </OverlayTrigger>
-        )
+        );
+        console.log("SessionCard.render end");
+        return returnValue;
     }
 
 }
