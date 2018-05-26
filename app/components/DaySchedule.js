@@ -23,8 +23,10 @@ export default class DaySchedule extends React.Component {
     }
 
     componentDidMount() {
+        console.log("DaySchedule.componentDidMount start");
         this.updateScreenSize();
         window.addEventListener('resize', this.updateScreenSize);
+        console.log("DaySchedule.componentDidMount end");
     }
 
     componentDidUnmount() {
