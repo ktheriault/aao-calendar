@@ -12,7 +12,6 @@ import "../style/App.css";
 export default class DaySchedule extends React.Component {
 
     constructor(props) {
-        console.log("DaySchedule.constructor");
         super(props);
         this.state = {
             singleColumnView: false,

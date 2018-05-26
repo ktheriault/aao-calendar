@@ -7,7 +7,6 @@ import "../style/App.css";
 class App extends React.Component {
 
     constructor(props) {
-        console.log("App.constructor");
         super(props);
     }
 

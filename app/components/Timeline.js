@@ -11,6 +11,7 @@ export default class Timeline extends React.Component {
     }
 
     render() {
+        console.log("Timeline.render");
         let { startTime, endTime } = this.props;
         let startHour = startTime.getHours();
         let numberOfHours = ((Date.parse(endTime) - Date.parse(startTime)) / 1000 / 3600) + 1;

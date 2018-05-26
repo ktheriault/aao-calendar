@@ -10,7 +10,6 @@ import "../style/App.css";
 export default class EventSchedule extends React.Component {
 
     constructor(props) {
-        console.log("EventSchedule.constructor");
         super(props);
         this.state = {
             eventDays: [],

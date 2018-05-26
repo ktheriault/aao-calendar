@@ -9,7 +9,6 @@ export default class RoomSchedule extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("RoomSchedule.constructor");
     }
 
     render() {
