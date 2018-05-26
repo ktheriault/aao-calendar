@@ -217,6 +217,29 @@ export default class DaySchedule extends React.Component {
                         );
                     })}
                 </Nav>
+            </div>
+        ) : (
+            <div>No sessions yet!</div>
+        );
+
+        /*
+        return sessionsByRoom && Object.keys(sessionsByRoom).length > 0 ? (
+            <div>
+                <Nav
+                    bsStyle="tabs"
+                    activeKey={viewKey}
+                    onSelect={onViewChanged}
+                >
+                    {Object.keys(SCHEDULE_VIEWS).map((scheduleView) => {
+                        let scheduleViewKey = SCHEDULE_VIEWS[scheduleView].key;
+                        let scheduleViewTitle = SCHEDULE_VIEWS[scheduleView].title;
+                        return (
+                            <NavItem key={scheduleViewKey} eventKey={scheduleViewKey}>
+                                {scheduleViewTitle}
+                            </NavItem>
+                        );
+                    })}
+                </Nav>
                 {singleColumnView && (
                     <div className={classNames("room-selector")}>
                         <DropdownButton
@@ -287,7 +310,8 @@ export default class DaySchedule extends React.Component {
             </div>
         ) : (
             <div>No sessions yet!</div>
-        )
+        );
+        */
     }
 
 }
