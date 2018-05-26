@@ -260,23 +260,25 @@ export default class DaySchedule extends React.Component {
                                 endTime={dayEndTime}
                             />
                         */}
-                        {roomsToDisplay && roomsToDisplay.map((room) => {
-                            let sessions = sessionsByRoom[room];
-                            return (
-                                <div
-                                    className={classNames("room-calendar-column")}
-                                    style={{height: `${calendarHeight}px`}}
-                                >
-                                    <RoomSchedule
-                                        room={room}
-                                        sessions={sessions}
-                                        onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
-                                        dayStartTime={dayStartTime}
-                                        dayEndTime={dayEndTime}
-                                    />
-                                </div>
-                            );
-                        })}
+                        {/*
+                            {roomsToDisplay && roomsToDisplay.map((room) => {
+                                let sessions = sessionsByRoom[room];
+                                return (
+                                    <div
+                                        className={classNames("room-calendar-column")}
+                                        style={{height: `${calendarHeight}px`}}
+                                    >
+                                        <RoomSchedule
+                                            room={room}
+                                            sessions={sessions}
+                                            onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
+                                            dayStartTime={dayStartTime}
+                                            dayEndTime={dayEndTime}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        */}
                         <ScrollbarSize
                             onLoad={this.onScrollbarLoad}
                             onChange={this.onScrollbarChange}
