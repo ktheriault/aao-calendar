@@ -45,10 +45,11 @@ CSS_CLASS_NAMES.forEach((className) => {
     CSS_CLASS_DICTIONARY[className] = true;
 });
 const ROOT_CSS_TEXT = CSS_RULE_LIST[0].style.cssText;
-const HOUR_HEIGHT = parseInt(ROOT_CSS_TEXT.split(" ")[1]) || 96;
+const HOUR_HEIGHT = parseInt(ROOT_CSS_TEXT.split(" ")[1]) || 144;
 const TIMELINE_VERTICAL_OFFSET = (parseInt(ROOT_CSS_TEXT.split(" ")[3]) || 12) * (3/4);
 export { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET };
 
+// https://stackoverflow.com/questions/13382516/getting-scroll-bar-width-using-javascript
 export function getScrollbarWidth() {
     var outer = document.createElement("div");
     outer.style.visibility = "hidden";

@@ -3,7 +3,7 @@
     --timeline-font-size: 12px; /* Must be second, see global.js */
     --timeline-width: 5em;
     --column-padding: 0.5em;
-    --session-color: #dbfce7;
+    --session-color: #ffccf1;
     --calendar-grid-color: #e4e4e4;
 }
 
@@ -31,27 +31,38 @@
 
 .room-names {
     display: flex;
+    display: -ms-flexbox; /* For IE */
     justify-content: space-between;
+    -ms-flex-pack: justify; /* For IE */
 }
 
 .room-schedules {
     display: flex;
+    display: -ms-flexbox; /* For IE */
     justify-content: space-between;
+    -ms-flex-pack: justify; /* For IE */
     height: 35em;
     overflow-y: scroll;
 }
 
 .room-name-column {
     flex-grow: 1;
+    -ms-flex-positive: 1; /* For IE */
     flex-basis: 0;
+    -ms-flex-preferred-size: 0; /* For IE */
     overflow: auto;
+    padding: 0 0.5em; /* For IE */
     padding: 0 var(--column-padding);
+    border-left: 1px solid #e4e4e4; /* For IE */
     border-left: 1px solid var(--calendar-grid-color);
 }
 
 .room-calendar-column {
     flex-grow: 1;
+    -ms-flex-positive: 1; /* For IE */
+    padding: 0 0.5em; /* For IE */
     padding: 0 var(--column-padding);
+    border-left: 1px solid #e4e4e4; /* For IE */
     border-left: 1px solid var(--calendar-grid-color);
 }
 
@@ -68,6 +79,7 @@
 }
 
 .timeline-placeholder {
+    width: 5em; /* For IE */
     width: var(--timeline-width);
 }
 
@@ -76,6 +88,7 @@
 }
 
 .timeline {
+    width: 5em; /* For IE */
     width: var(--timeline-width);
     position: relative;
 }
@@ -84,13 +97,17 @@
     position: absolute;
     width: 100%;
     text-align: center;
+    font-size: 12px; /* For IE */
     font-size: var(--timeline-font-size);
 }
 
 .hour-rule {
+    border-color: #e4e4e4; /* For IE */
     border-color: var(--calendar-grid-color);
     position: absolute;
+    left: calc(-1 * 0.5em); /* For IE */
     left: calc(-1 * var(--column-padding));
+    width: calc(100% + 10em); /* For IE */
     width: calc(100% + 2 * var(--column-padding));
     margin: 0;
 }
@@ -102,6 +119,7 @@
     width: 100%;
     padding: 0.5em;
     overflow-x: hidden;
+    background: #dbfce7; /* For IE */
     background: var(--session-color);
 }
 
@@ -118,41 +136,51 @@
 }
 
 .time-block-15 {
+    height: 36px; /* For IE */
     height: calc(var(--hour-height) * 0.25);
 }
 
 .time-block-20 {
+    height: 48px; /* For IE */
     height: calc(var(--hour-height) / 3);
 }
 
 .time-block-30 {
+    height: 72px; /* For IE */
     height: calc(var(--hour-height) * 0.5)
 }
 
 .time-block-45 {
+    height: 108px; /* For IE */
     height: calc(var(--hour-height) * 0.75);
 }
 
 .time-block-60 {
+    height: 144px; /* For IE */
     height: var(--hour-height);
 }
 
 .time-block-90 {
+    height: 216px; /* For IE */
     height: calc(var(--hour-height) * 1.5);
 }
 
 .time-block-120 {
+    height: 288px; /* For IE */
     height: calc(var(--hour-height) * 2);
 }
 
 .time-block-150 {
+    height: 360px; /* For IE */
     height: calc(var(--hour-height) * 2.5);
 }
 
 .time-block-180 {
+    height: 432px; /* For IE */
     height: calc(var(--hour-height) * 3);
 }
 
 .time-block-570 {
+    height: 1368px; /* For IE */
     height: calc(var(--hour-height) * 9.5);
 }

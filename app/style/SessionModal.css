@@ -42,5 +42,5 @@
 
 .modal-image {
     max-width: 100px;
-    height: auto;
+    height: auto; /* For IE */
 }
