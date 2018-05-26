@@ -18,7 +18,7 @@ export default class SessionCard extends React.Component {
     }
 
     render() {
-        console.log("SessionCard.render start");
+        console.log("SessionCard.render");
         let { session, onSessionClicked, dayStartTime } = this.props;
         let speakers = session.speakers;
 
@@ -38,7 +38,6 @@ export default class SessionCard extends React.Component {
 
         let minutesSinceDayStartTime = (Date.parse(session.startDateTime) - Date.parse(dayStartTime)) / 1000 / 60;
         let sessionLocationInPixels = minutesSinceDayStartTime * HOUR_HEIGHT / 60;
-        console.log("SessionCard.render done with time");
 
         let tooltip = (
             <Tooltip>
@@ -59,41 +58,38 @@ export default class SessionCard extends React.Component {
                 </div>
             </Tooltip>
         );
-        console.log("SessionCard.render done with tooltip");
 
-        let returnValue = (
+        return (
             <OverlayTrigger overlay={tooltip} placement="top" delayShow={500}>
-            <div
-                name="Session"
-                className={classNames("session-card", heightClass)}
-                style={!heightClassExists ? {
-                    height: `${lengthInMinutes / 60 * HOUR_HEIGHT}px`,
-                    top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`,
-                } : {
-                    top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`
-                }}
-                onClick={onSessionClicked}
-            >
-                {speakers.map((speaker) => {
-                    let speakerName = `${speaker.firstName} ${speaker.lastName}`;
-                    if (speaker.prefix) { speakerName = `${speaker.prefix} ${speakerName}`; }
-                    return (
-                        <div className={classNames("overflow-text", "session-speaker-text")}>
-                            {speakerName}
-                        </div>
-                    )
-                })}
-                <div className={classNames("overflow-text", "session-title-text")}>
-                    {session.title}
+                <div
+                    name="Session"
+                    className={classNames("session-card", heightClass)}
+                    style={!heightClassExists ? {
+                        height: `${lengthInMinutes / 60 * HOUR_HEIGHT}px`,
+                        top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`,
+                    } : {
+                        top: `${sessionLocationInPixels + TIMELINE_VERTICAL_OFFSET}px`
+                    }}
+                    onClick={onSessionClicked}
+                >
+                    {speakers.map((speaker) => {
+                        let speakerName = `${speaker.firstName} ${speaker.lastName}`;
+                        if (speaker.prefix) { speakerName = `${speaker.prefix} ${speakerName}`; }
+                        return (
+                            <div className={classNames("overflow-text", "session-speaker-text")}>
+                                {speakerName}
+                            </div>
+                        )
+                    })}
+                    <div className={classNames("overflow-text", "session-title-text")}>
+                        {session.title}
+                    </div>
+                    <div className={classNames("overflow-text", "session-time-text")}>
+                        {`${startTimeString} - ${endTimeString}`}
+                    </div>
                 </div>
-                <div className={classNames("overflow-text", "session-time-text")}>
-                    {`${startTimeString} - ${endTimeString}`}
-                </div>
-            </div>
             </OverlayTrigger>
         );
-        console.log("SessionCard.render end");
-        return returnValue;
     }
 
 }

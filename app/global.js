@@ -38,7 +38,6 @@ export const ABBR_DAYS = [
 
 // CSS information for dynamic styling if the CSS class doesn't exist
 import "./style/App.css";
-console.log("Start CSS calculations");
 let CSS_RULE_LIST = document.styleSheets[1].cssRules;
 let CSS_CLASS_NAMES = [].slice.call(CSS_RULE_LIST).map(cssStyleRule => cssStyleRule.selectorText);
 let CSS_CLASS_DICTIONARY = {};
@@ -49,7 +48,6 @@ const ROOT_CSS_TEXT = CSS_RULE_LIST[0].style.cssText;
 const HOUR_HEIGHT = parseInt(ROOT_CSS_TEXT.split(" ")[1]) || 96;
 const TIMELINE_VERTICAL_OFFSET = (parseInt(ROOT_CSS_TEXT.split(" ")[3]) || 12) * (3/4);
 export { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET };
-console.log("End CSS calculations");
 
 export function getScrollbarWidth() {
     var outer = document.createElement("div");

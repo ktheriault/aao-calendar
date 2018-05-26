@@ -353,10 +353,6 @@ export default class DaySchedule extends React.Component {
                                 </div>
                             );
                         })}
-                        <ScrollbarSize
-                            onLoad={this.onScrollbarLoad}
-                            onChange={this.onScrollbarChange}
-                        />
                     </div>
                 </div>
                 <SessionModal
