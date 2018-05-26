@@ -12,6 +12,7 @@ import "../style/App.css";
 export default class DaySchedule extends React.Component {
 
     constructor(props) {
+        console.log("DaySchedule.constructor");
         super(props);
         this.state = {
             singleColumnView: false,
@@ -68,6 +69,7 @@ export default class DaySchedule extends React.Component {
     };
 
     render() {
+        console.log("DaySchedule.render");
         let {
             viewKey,
             onViewChanged,

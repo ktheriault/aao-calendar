@@ -10,6 +10,7 @@ import "../style/App.css";
 export default class EventSchedule extends React.Component {
 
     constructor(props) {
+        console.log("EventSchedule.constructor");
         super(props);
         this.state = {
             eventDays: [],
@@ -59,6 +60,7 @@ export default class EventSchedule extends React.Component {
     };
 
     render() {
+        console.log("EventSchedule.render");
         let {
             selectedDayKey,
             selectedViewKey,

@@ -8,7 +8,7 @@ import "../style/App.css";
 export default class SessionCard extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {

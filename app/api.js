@@ -13,6 +13,7 @@ export async function getEventByID(
     includeExhibitors=false,
     includeExhibitorInfo=false
 ) {
+    console.log("Start getEventByID");
     let url = `${baseURL}/${eventEndpoint}/${eventID}`;
     if (includeSponsors || includeSpeakers || includeSessions || includeExhibitors || includeExhibitorInfo) {
         url += "?Include=";
@@ -37,6 +38,7 @@ export async function getEventByID(
         type: "GET",
         url: url,
     });
+    console.log("End getEventByID");
     return response ? response : null;
 }
 
@@ -50,7 +52,7 @@ async function getSpeakerForEvent(eventID, speakerID) {
 }
 
 export async function parseEventData(eventData) {
-
+    console.log("Start parseEventData");
     if (!eventData || !eventData.event || !eventData.related || !eventData.related.sessions || !eventData.related.speakers) {
         return null;
     }
@@ -158,6 +160,8 @@ export async function parseEventData(eventData) {
     eventDays = eventDays.map((eventMsString) => {
         return (new Date(eventMsString)).toDateString();
     });
+
+    console.log("End parseEventData");
 
     return {
         eventDays,
