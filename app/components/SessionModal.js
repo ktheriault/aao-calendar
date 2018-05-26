@@ -14,7 +14,9 @@ export default class SessionModal extends React.Component {
     componentDidCatch(errorString, errorInfo) {
         console.log("SessionModal error");
         console.log(errorString);
-        console.log(Object.keys(errorInfo));
+        Object.keys(errorInfo).forEach((errorItem) => {
+            console.log(errorItem, errorInfo[errorItem]);
+        });
     }
 
     render() {

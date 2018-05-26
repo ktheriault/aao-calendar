@@ -14,7 +14,9 @@ export default class SessionCard extends React.Component {
     componentDidCatch(errorString, errorInfo) {
         console.log("SessionCard error");
         console.log(errorString);
-        console.log(Object.keys(errorInfo));
+        Object.keys(errorInfo).forEach((errorItem) => {
+            console.log(errorItem, errorInfo[errorItem]);
+        });
     }
 
     render() {
