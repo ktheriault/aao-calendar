@@ -21,6 +21,12 @@ export default class EventSchedule extends React.Component {
         }
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("EventSchedule error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     async componentDidMount() {
         let { eventID } = this.props;
         let eventData = await api.getEventByID(eventID, false, true, true);

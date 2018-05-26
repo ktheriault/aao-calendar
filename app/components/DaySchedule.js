@@ -22,6 +22,12 @@ export default class DaySchedule extends React.Component {
         };
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("DaySchedule error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     componentDidMount() {
         console.log("DaySchedule.componentDidMount start");
         this.updateScreenSize();

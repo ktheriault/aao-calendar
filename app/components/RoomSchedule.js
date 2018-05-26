@@ -11,6 +11,12 @@ export default class RoomSchedule extends React.Component {
         super(props);
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("RoomSchedule error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     render() {
         console.log("RoomSchedule.render");
         let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime } = this.props;

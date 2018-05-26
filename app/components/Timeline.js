@@ -10,6 +10,12 @@ export default class Timeline extends React.Component {
         super(props);
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("Timeline error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     render() {
         console.log("Timeline.render");
         let { startTime, endTime } = this.props;

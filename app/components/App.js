@@ -10,6 +10,12 @@ class App extends React.Component {
         super(props);
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("App error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     render() {
         console.log("App.render");
         return (

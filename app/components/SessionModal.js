@@ -11,6 +11,12 @@ export default class SessionModal extends React.Component {
         super(props);
     }
 
+    componentDidCatch(errorString, errorInfo) {
+        console.log("SessionModal error");
+        console.log(errorString);
+        console.log(errorInfo);
+    }
+
     render() {
         console.log("SessionModal.render start");
         let { isVisible, onClose, session } = this.props;
