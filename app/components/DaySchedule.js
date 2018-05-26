@@ -2,11 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
-import ScrollbarSize from "react-scrollbar-size";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import SessionModal from "../components/SessionModal";
-import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
+import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET, getScrollbarWidth } from "../global";
 import "../style/App.css";
 
 export default class DaySchedule extends React.Component {
@@ -35,23 +34,14 @@ export default class DaySchedule extends React.Component {
         this.updateScreenSize();
         window.addEventListener('resize', this.updateScreenSize);
         console.log("DaySchedule.componentDidMount end");
+        this.setState({
+            scrollbarWidth: getScrollbarWidth(),
+        })
     }
 
     componentDidUnmount() {
         window.removeEventListener('resize', this.updateScreenSize);
     }
-
-    onScrollbarLoad = (measurements) => {
-        this.setState({
-            scrollbarWidth: measurements.scrollbarWidth,
-        })
-    };
-
-    onScrollbarChange = (measurements) => {
-        this.setState({
-            scrollbarWidth: measurements.scrollbarWidth,
-        })
-    };
 
     getOnSessionClickedHandler = (room) => {
         return (i) => {
@@ -275,12 +265,6 @@ export default class DaySchedule extends React.Component {
                                 </div>
                             );
                         })}
-                        {/*
-                            <ScrollbarSize
-                                onLoad={this.onScrollbarLoad}
-                                onChange={this.onScrollbarChange}
-                            />
-                        */}
                     </div>
                 </div>
                 {/*
