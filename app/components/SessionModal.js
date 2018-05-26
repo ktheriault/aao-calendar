@@ -68,12 +68,12 @@ export default class SessionModal extends React.Component {
                                     <h4 className={classNames("modal-section-title")}>Speakers</h4>
                                     {speakers.map((speaker) => {
                                         let { fullName, hasFinancialInterest, speakerBio, pictureURL } = speaker;
-                                        console.log(pictureURL);
+                                        let httpPictureURL = pictureURL.replace("https", "http"));
                                         return (
                                             <div className={classNames("modal-indent", "modal-subsection")}>
                                                 <div className={classNames("modal-float-item")}>
-                                                    {pictureURL && (
-                                                        <Img src={pictureURL} className={classNames("modal-image")}/>
+                                                    {httpPictureURL && (
+                                                        <Img src={httpPictureURL} className={classNames("modal-image")}/>
                                                     )}
                                                 </div>
                                                 <div>
