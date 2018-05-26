@@ -253,33 +253,35 @@ export default class DaySchedule extends React.Component {
                         })}
                         <div style={{ width: `${scrollbarWidth}px` }}/>
                     </div>
-                    <div className={classNames("room-schedules")}>
-                        <Timeline
-                            startTime={dayStartTime}
-                            endTime={dayEndTime}
-                        />
-                        {roomsToDisplay && roomsToDisplay.map((room) => {
-                            let sessions = sessionsByRoom[room];
-                            return (
-                                <div
-                                    className={classNames("room-calendar-column")}
-                                    style={{ height: `${calendarHeight}px` }}
-                                >
-                                    <RoomSchedule
-                                        room={room}
-                                        sessions={sessions}
-                                        onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
-                                        dayStartTime={dayStartTime}
-                                        dayEndTime={dayEndTime}
-                                    />
-                                </div>
-                            );
-                        })}
-                        <ScrollbarSize
-                            onLoad={this.onScrollbarLoad}
-                            onChange={this.onScrollbarChange}
-                        />
-                    </div>
+                    {
+                        <div className={classNames("room-schedules")}>
+                            <Timeline
+                                startTime={dayStartTime}
+                                endTime={dayEndTime}
+                            />
+                            {roomsToDisplay && roomsToDisplay.map((room) => {
+                                let sessions = sessionsByRoom[room];
+                                return (
+                                    <div
+                                        className={classNames("room-calendar-column")}
+                                        style={{height: `${calendarHeight}px`}}
+                                    >
+                                        <RoomSchedule
+                                            room={room}
+                                            sessions={sessions}
+                                            onSessionClickedHandler={this.getOnSessionClickedHandler(room)}
+                                            dayStartTime={dayStartTime}
+                                            dayEndTime={dayEndTime}
+                                        />
+                                    </div>
+                                );
+                            })}
+                            <ScrollbarSize
+                                onLoad={this.onScrollbarLoad}
+                                onChange={this.onScrollbarChange}
+                            />
+                        </div>
+                    }
                 </div>
                 {/*
                     <SessionModal

@@ -24,7 +24,7 @@ export default class RoomSchedule extends React.Component {
         let hours = Array.apply(null, new Array(numberOfHours)).map((empty, i) => { return i; });
 
         return (
-            <div name="RoomSchedule" className={classNames("sessions-container")}>
+            <div className={classNames("sessions-container")}>
                 {hours && hours.map((hour, hoursSinceStartTime) => {
                     let timeLocationInPixels = hoursSinceStartTime * HOUR_HEIGHT;
                     return (
