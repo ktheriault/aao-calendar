@@ -101,6 +101,28 @@ export default class EventSchedule extends React.Component {
                         );
                     })}
                 </Nav>
+            </div>
+        );
+
+        /*
+        return (
+            <div>
+                <Nav
+                    bsStyle="pills"
+                    className={classNames("event-day-selector")}
+                    activeKey={selectedDayKey}
+                    onSelect={this.onDaySelected}
+                >
+                    {eventDays.map((eventDay) => {
+                        let date = new Date(eventDay);
+                        let dateString = `${ABBR_DAYS[date.getDay()]}, ${ABBR_MONTHS[date.getMonth()]} ${date.getDate()}`
+                        return (
+                            <NavItem key={eventDay} eventKey={eventDay}>
+                                {dateString}
+                            </NavItem>
+                        );
+                    })}
+                </Nav>
                 <DaySchedule
                     viewKey={selectedViewKey}
                     onViewChanged={this.onViewChanged}
@@ -112,6 +134,7 @@ export default class EventSchedule extends React.Component {
                 />
             </div>
         );
+        */
     }
 }
 
