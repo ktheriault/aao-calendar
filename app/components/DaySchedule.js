@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
@@ -9,7 +9,7 @@ import SessionModal from "../components/SessionModal";
 import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
 import "../style/App.css";
 
-export default class DaySchedule extends Component {
+export default class DaySchedule extends React.Component {
 
     constructor(props) {
         super(props);

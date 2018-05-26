@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Modal, Badge } from "react-bootstrap";
 import Img from "react-image";
 import "../style/SessionModal.css";
 
-export default class SessionModal extends Component {
+export default class SessionModal extends React.Component {
 
     constructor(props) {
         super(props);

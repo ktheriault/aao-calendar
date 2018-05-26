@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem } from "react-bootstrap";
@@ -7,7 +7,7 @@ import * as api from "../api";
 import { SCHEDULE_VIEWS, ABBR_MONTHS, ABBR_DAYS } from "../global";
 import "../style/App.css";
 
-export default class EventSchedule extends Component {
+export default class EventSchedule extends React.Component {
 
     constructor(props) {
         super(props);

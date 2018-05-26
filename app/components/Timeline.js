@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { HOUR_HEIGHT } from '../global';
 import "../style/App.css";
 
-export default class Timeline extends Component {
+export default class Timeline extends React.Component {
 
     constructor(props) {
         super(props);
