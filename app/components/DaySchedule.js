@@ -260,7 +260,6 @@ export default class DaySchedule extends React.Component {
                                 endTime={dayEndTime}
                             />
                         */}
-                        {/*
                             {roomsToDisplay && roomsToDisplay.map((room) => {
                                 let sessions = sessionsByRoom[room];
                                 return (
@@ -278,13 +277,12 @@ export default class DaySchedule extends React.Component {
                                     </div>
                                 );
                             })}
-                        */}
-                        {
+                        {/*
                             <ScrollbarSize
                                 onLoad={this.onScrollbarLoad}
                                 onChange={this.onScrollbarChange}
                             />
-                        }
+                        */}
                     </div>
                 </div>
                 {/*
