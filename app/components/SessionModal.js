@@ -71,9 +71,9 @@ export default class SessionModal extends React.Component {
                                         return (
                                             <div className={classNames("modal-indent", "modal-subsection")}>
                                                 <div className={classNames("modal-float-item")}>
-                                                    {/*pictureURL && (
+                                                    {pictureURL && (
                                                         <Img src={pictureURL} className={classNames("modal-image")}/>
-                                                    )*/}
+                                                    )}
                                                 </div>
                                                 <div>
                                                     <h5>{fullName}</h5>

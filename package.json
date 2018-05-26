@@ -40,6 +40,7 @@
     "babel-plugin-transform-proto-to-assign": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "es6-object-assign": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.8.3",

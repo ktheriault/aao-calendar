@@ -1,4 +1,5 @@
 require("babel-polyfill");
+require("es6-object-assign").polyfill();
 
 const express = require('express');
 const path = require('path');
