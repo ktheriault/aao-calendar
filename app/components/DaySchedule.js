@@ -254,10 +254,12 @@ export default class DaySchedule extends React.Component {
                         <div style={{ width: `${scrollbarWidth}px` }}/>
                     </div>
                     <div className={classNames("room-schedules")}>
-                        <Timeline
-                            startTime={dayStartTime}
-                            endTime={dayEndTime}
-                        />
+                        {/*
+                            <Timeline
+                                startTime={dayStartTime}
+                                endTime={dayEndTime}
+                            />
+                        */}
                         {/*roomsToDisplay && roomsToDisplay.map((room) => {
                             let sessions = sessionsByRoom[room];
                             return (
