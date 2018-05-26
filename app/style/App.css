@@ -9,7 +9,7 @@ global.js also sets some default values if it can't parse the CSS, so change tho
     --timeline-font-size: 12px; /* Must be second, see global.js */
     --timeline-width: 5em;
     --column-padding: 0.5em;
-    --session-color: #ffccf1;
+    --session-color: #dbfce7;
     --calendar-grid-color: #e4e4e4;
 }
 
