@@ -16,7 +16,7 @@ export default class RoomSchedule extends React.Component {
         console.log("RoomSchedule.render");
         let { sessions, onSessionClickedHandler, dayStartTime, dayEndTime } = this.props;
         let numberOfHours = ((Date.parse(dayEndTime) - Date.parse(dayStartTime)) / 1000 / 3600) + 1;
-        let hours = Array.apply(null, Array(numberOfHours)).map((empty, i) => { return i; });
+        let hours = Array.apply(null, new Array(numberOfHours)).map((empty, i) => { return i; });
 
         return (
             <div name="RoomSchedule" className={classNames("sessions-container")}>
