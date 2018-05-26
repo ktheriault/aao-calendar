@@ -12,6 +12,7 @@ export default class SessionCard extends React.Component {
     }
 
     render() {
+        console.log("SessionCard.render");
         let { session, onSessionClicked, dayStartTime } = this.props;
         let speakers = session.speakers;
 

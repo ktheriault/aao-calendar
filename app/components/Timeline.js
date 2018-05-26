@@ -14,7 +14,7 @@ export default class Timeline extends React.Component {
         let { startTime, endTime } = this.props;
         let startHour = startTime.getHours();
         let numberOfHours = ((Date.parse(endTime) - Date.parse(startTime)) / 1000 / 3600) + 1;
-        let hourStrings = Array.apply(null, Array(numberOfHours)).map((empty, i) => {
+        let hourStrings = Array.apply(null, new Array(numberOfHours)).map((empty, i) => {
             let hour = startHour + i;
             return `${hour > 12 ? hour - 12 : hour}:00 ${hour > 11 ? "pm" : "am"}`;
         });
