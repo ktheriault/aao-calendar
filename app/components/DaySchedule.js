@@ -277,17 +277,21 @@ export default class DaySchedule extends React.Component {
                                 </div>
                             );
                         })*/}
-                        <ScrollbarSize
-                            onLoad={this.onScrollbarLoad}
-                            onChange={this.onScrollbarChange}
-                        />
+                        {/*
+                            <ScrollbarSize
+                                onLoad={this.onScrollbarLoad}
+                                onChange={this.onScrollbarChange}
+                            />
+                        */}
                     </div>
                 </div>
-                <SessionModal
-                    isVisible={showModal}
-                    onClose={this.onModalClose}
-                    session={sessionInModal}
-                />
+                {/*
+                    <SessionModal
+                        isVisible={showModal}
+                        onClose={this.onModalClose}
+                        session={sessionInModal}
+                    />
+                */}
             </div>
         ) : (
             <div>No sessions yet!</div>
