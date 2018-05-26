@@ -24,7 +24,7 @@ export default class EventSchedule extends React.Component {
     componentDidCatch(errorString, errorInfo) {
         console.log("EventSchedule error");
         console.log(errorString);
-        console.log(errorInfo);
+        console.log(Object.keys(errorInfo));
     }
 
     async componentDidMount() {

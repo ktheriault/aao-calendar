@@ -25,7 +25,7 @@ export default class DaySchedule extends React.Component {
     componentDidCatch(errorString, errorInfo) {
         console.log("DaySchedule error");
         console.log(errorString);
-        console.log(errorInfo);
+        console.log(Object.keys(errorInfo));
     }
 
     componentDidMount() {

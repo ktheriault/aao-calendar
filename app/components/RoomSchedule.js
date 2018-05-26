@@ -14,7 +14,7 @@ export default class RoomSchedule extends React.Component {
     componentDidCatch(errorString, errorInfo) {
         console.log("RoomSchedule error");
         console.log(errorString);
-        console.log(errorInfo);
+        console.log(Object.keys(errorInfo));
     }
 
     render() {
