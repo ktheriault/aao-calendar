@@ -11,12 +11,10 @@ export default class SessionCard extends React.Component {
         super(props);
     }
 
-    componentDidCatch(errorString, errorInfo) {
+    componentDidCatch(error, errorInfo) {
         console.log("SessionCard error");
-        console.log(errorString);
-        Object.keys(errorInfo).forEach((errorItem) => {
-            console.log(errorItem, errorInfo[errorItem]);
-        });
+        console.log(error);
+        console.log(errorInfo.componentStack);
     }
 
     render() {

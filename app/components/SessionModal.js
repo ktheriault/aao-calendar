@@ -11,12 +11,10 @@ export default class SessionModal extends React.Component {
         super(props);
     }
 
-    componentDidCatch(errorString, errorInfo) {
+    componentDidCatch(error, errorInfo) {
         console.log("SessionModal error");
-        console.log(errorString);
-        Object.keys(errorInfo).forEach((errorItem) => {
-            console.log(errorItem, errorInfo[errorItem]);
-        });
+        console.log(error);
+        console.log(errorInfo.componentStack);
     }
 
     render() {
@@ -120,7 +118,7 @@ export default class SessionModal extends React.Component {
                 );
             }
         }
-        console.log("SessionModal.render null")
+        console.log("SessionModal.render null");
         return null;
     }
 }

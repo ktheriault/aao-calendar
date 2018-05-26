@@ -11,12 +11,10 @@ export default class RoomSchedule extends React.Component {
         super(props);
     }
 
-    componentDidCatch(errorString, errorInfo) {
+    componentDidCatch(error, errorInfo) {
         console.log("RoomSchedule error");
-        console.log(errorString);
-        Object.keys(errorInfo).forEach((errorItem) => {
-            console.log(errorItem, errorInfo[errorItem]);
-        });
+        console.log(error);
+        console.log(errorInfo.componentStack);
     }
 
     render() {
@@ -37,7 +35,6 @@ export default class RoomSchedule extends React.Component {
                     )
                 })}
                 {sessions && sessions.map((session, i) => {
-                    throw new Error("Here is the error");
                     return (
                         <SessionCard
                             session={session}
@@ -47,7 +44,7 @@ export default class RoomSchedule extends React.Component {
                     );
                 })}
             </div>
-    )
+        );
     }
 
 }

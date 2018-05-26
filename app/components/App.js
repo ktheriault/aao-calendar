@@ -10,16 +10,7 @@ class App extends React.Component {
         super(props);
     }
 
-    componentDidCatch(errorString, errorInfo) {
-        console.log("App error");
-        console.log(errorString);
-        Object.keys(errorInfo).forEach((errorItem) => {
-            console.log(errorItem, errorInfo[errorItem]);
-        });
-    }
-
     render() {
-        console.log("App.render");
         return (
             <div className={classNames("app-container")}>
                 <EventSchedule

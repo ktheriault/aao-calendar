@@ -10,12 +10,10 @@ export default class Timeline extends React.Component {
         super(props);
     }
 
-    componentDidCatch(errorString, errorInfo) {
+    componentDidCatch(error, errorInfo) {
         console.log("Timeline error");
-        console.log(errorString);
-        Object.keys(errorInfo).forEach((errorItem) => {
-            console.log(errorItem, errorInfo[errorItem]);
-        });
+        console.log(error);
+        console.log(errorInfo.componentStack);
     }
 
     render() {
