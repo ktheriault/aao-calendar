@@ -75,6 +75,7 @@ export default class DaySchedule extends React.Component {
         this.setState({
             singleColumnView: window.innerWidth <= 768,
         });
+        console.log("updateScreenSize:", window.innerWidth);
     };
 
     render() {

@@ -19,7 +19,7 @@ export default class Timeline extends React.Component {
     }
 
     render() {
-        console.log("Timeline.render");
+        console.log("Timeline.render start");
         let { startTime, endTime } = this.props;
         let startHour = startTime.getHours();
         let numberOfHours = ((Date.parse(endTime) - Date.parse(startTime)) / 1000 / 3600) + 1;
@@ -27,7 +27,8 @@ export default class Timeline extends React.Component {
             let hour = startHour + i;
             return `${hour > 12 ? hour - 12 : hour}:00 ${hour > 11 ? "pm" : "am"}`;
         });
-        return (
+        console.log("Timeline.render done calculating");
+        let returnValue = (
             <div className={classNames("timeline")}>
                 {hourStrings.map((hourString, hoursSinceStartTime) => {
                     let timeLocationInPixels = hoursSinceStartTime * HOUR_HEIGHT;
@@ -41,7 +42,9 @@ export default class Timeline extends React.Component {
                     )
                 })}
             </div>
-        )
+        );
+        console.log("Timeline.render end");
+        return returnValue;
     }
 
 }

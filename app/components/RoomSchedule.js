@@ -37,6 +37,7 @@ export default class RoomSchedule extends React.Component {
                     )
                 })}
                 {sessions && sessions.map((session, i) => {
+                    throw new Error("Here is the error");
                     return (
                         <SessionCard
                             session={session}
