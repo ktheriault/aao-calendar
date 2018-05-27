@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { CSS_CLASS_DICTIONARY, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
-import "../style/App.css";
 
 export default class SessionCard extends React.Component {
 

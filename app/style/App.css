@@ -74,6 +74,7 @@ global.js also sets some default values if it can't parse the CSS, so change tho
 }
 
 .room-selector {
+    width: 33%;
     text-align: center;
     padding: 0.5em 0;
 }
@@ -83,6 +84,14 @@ global.js also sets some default values if it can't parse the CSS, so change tho
     margin: 0.5em 0;
     padding: 0.25em 0; /* vertical centering */
     text-align: center;
+}
+
+.left-pagination {
+    margin-right: 0.5em;
+}
+
+.right-pagination {
+    margin-left: 0.5em;
 }
 
 .timeline-placeholder {

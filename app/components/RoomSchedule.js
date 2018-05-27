@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import SessionCard from "../components/SessionCard";
 import { HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET } from "../global";
-import "../style/App.css";
 
 export default class RoomSchedule extends React.Component {
 

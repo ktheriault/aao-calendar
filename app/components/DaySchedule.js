@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Nav, NavItem, DropdownButton, MenuItem } from "react-bootstrap";
+import { Nav, NavItem, Button, Glyphicon } from "react-bootstrap";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import SessionModal from "../components/SessionModal";
 import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET, getScrollbarWidth } from "../global";
-import "../style/App.css";
 
 export default class DaySchedule extends React.Component {
 
@@ -62,7 +61,8 @@ export default class DaySchedule extends React.Component {
             viewKey,
             onViewChanged,
             selectedRoomIndex,
-            getOnRoomChangedHandler,
+            onRoomIncrement,
+            onRoomDecrement,
             sessionsByRoom,
             dayStartTime,
             dayEndTime
@@ -92,26 +92,6 @@ export default class DaySchedule extends React.Component {
                         );
                     })}
                 </Nav>
-                {singleColumnView && (
-                    <div className={classNames("room-selector")}>
-                        <DropdownButton
-                            bsStyle="info"
-                            title={roomList[selectedRoomIndex]}
-                            key={selectedRoomIndex}
-                        >
-                            {roomList.map((room, i) => {
-                                return (
-                                    <MenuItem
-                                        eventKey={i}
-                                        onClick={getOnRoomChangedHandler(i)}
-                                    >
-                                        {room}
-                                    </MenuItem>
-                                );
-                            })}
-                        </DropdownButton>
-                    </div>
-                )}
                 <div>
                     <div className={classNames("room-names")}>
                         <div className={classNames("timeline-placeholder")}/>
@@ -119,7 +99,17 @@ export default class DaySchedule extends React.Component {
                             return (
                                 <div className={classNames("room-name-column")}>
                                     <div className={classNames("room-name", "overflow-text")}>
+                                        {singleColumnView && (
+                                            <span onClick={onRoomDecrement}
+                                                className={classNames("left-pagination", "text-info", "glyphicon", "glyphicon-chevron-left")}
+                                            />
+                                        )}
                                         {room}
+                                        {singleColumnView && (
+                                            <span onClick={onRoomIncrement}
+                                                className={classNames("right-pagination", "text-info", "glyphicon", "glyphicon-chevron-right")}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             );
@@ -169,7 +159,8 @@ DaySchedule.propTypes = {
     viewKey: PropTypes.string,
     onViewChanged: PropTypes.func,
     selectedRoomIndex: PropTypes.number,
-    getOnRoomChangedHandler: PropTypes.func,
+    onRoomIncrement: PropTypes.func,
+    onRoomDecrement: PropTypes.func,
     dayStartTime: PropTypes.object,
     dayEndTime: PropTypes.object,
     sessionsByRoom: PropTypes.object,

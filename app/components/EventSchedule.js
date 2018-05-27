@@ -5,7 +5,6 @@ import { Nav, NavItem } from "react-bootstrap";
 import DaySchedule from "../components/DaySchedule";
 import * as api from "../api";
 import { SCHEDULE_VIEWS, ABBR_MONTHS, ABBR_DAYS } from "../global";
-import "../style/App.css";
 
 export default class EventSchedule extends React.Component {
 
@@ -41,21 +40,31 @@ export default class EventSchedule extends React.Component {
     onDaySelected = (dayKey) => {
         this.setState({
             selectedDayKey: dayKey,
+            selectedRoomIndex: 0,
         })
     };
 
     onViewChanged = (viewKey) => {
         this.setState({
             selectedViewKey: viewKey,
+            selectedRoomIndex: 0,
         })
     };
 
-    getOnRoomChangedHandler = (i) => {
-        return () => {
-            this.setState({
-                selectedRoomIndex: i,
-            });
-        }
+    onRoomIncrement = () => {
+        let { eventSessions, selectedDayKey, selectedViewKey, selectedRoomIndex } = this.state;
+        let numberOfRooms = Object.keys(eventSessions[selectedDayKey][selectedViewKey].sessions).length;
+        this.setState({
+            selectedRoomIndex: (selectedRoomIndex + 1 + numberOfRooms) % numberOfRooms,
+        });
+    };
+
+    onRoomDecrement = () => {
+        let { eventSessions, selectedDayKey, selectedViewKey, selectedRoomIndex } = this.state;
+        let numberOfRooms = Object.keys(eventSessions[selectedDayKey][selectedViewKey].sessions).length;
+        this.setState({
+            selectedRoomIndex: (selectedRoomIndex - 1 + numberOfRooms) % numberOfRooms,
+        });
     };
 
     render() {
@@ -98,7 +107,8 @@ export default class EventSchedule extends React.Component {
                     viewKey={selectedViewKey}
                     onViewChanged={this.onViewChanged}
                     selectedRoomIndex={selectedRoomIndex}
-                    getOnRoomChangedHandler={this.getOnRoomChangedHandler}
+                    onRoomIncrement={this.onRoomIncrement}
+                    onRoomDecrement={this.onRoomDecrement}
                     dayStartTime={dayStartTime}
                     dayEndTime={dayEndTime}
                     sessionsByRoom={sessions}
