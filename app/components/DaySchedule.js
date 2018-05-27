@@ -5,7 +5,8 @@ import { Nav, NavItem, Button, Glyphicon } from "react-bootstrap";
 import Timeline from '../components/Timeline';
 import RoomSchedule from "../components/RoomSchedule";
 import SessionModal from "../components/SessionModal";
-import { SCHEDULE_VIEWS, HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET, getScrollbarWidth } from "../global";
+import { SCHEDULE_VIEWS } from "../api";
+import { HOUR_HEIGHT, TIMELINE_VERTICAL_OFFSET, getScrollbarWidth } from "../global";
 
 export default class DaySchedule extends React.Component {
 

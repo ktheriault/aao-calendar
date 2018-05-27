@@ -1,11 +1,25 @@
-import $ from "jquery";
-import { SCHEDULE_VIEWS } from "./global";
+let $ = require("jquery");
+
+const EVENT_ID = "213800ffda91408c9266c28b954e95f6";
+module.exports.EVENT_ID = EVENT_ID;
+
+const SCHEDULE_VIEWS = {
+    FOR_DOCTORS: {
+        key: "forDoctors",
+        title: "For Doctors",
+    },
+    FOR_STAFF: {
+        key:"forStaff",
+        title: "For Staff"
+    },
+};
+module.exports.SCHEDULE_VIEWS = SCHEDULE_VIEWS;
 
 const baseURL = "http://nf.aaoinfo.org/mapi/api";
 const eventEndpoint = "events";
 const speakerEndpoint = "speakers";
 
-export async function getEventByID(
+async function getEventByID(
     eventID,
     includeSponsors=false,
     includeSpeakers=false,
@@ -39,6 +53,8 @@ export async function getEventByID(
     });
     return response ? response : null;
 }
+module.exports.getEventByID = getEventByID;
+
 
 async function getSpeakerForEvent(eventID, speakerID) {
     let url = `${baseURL}/${eventEndpoint}/${eventID}/${speakerEndpoint}/${speakerID}`;
@@ -49,7 +65,7 @@ async function getSpeakerForEvent(eventID, speakerID) {
     return response && response.speaker ? response.speaker : null;
 }
 
-export async function parseEventData(eventData) {
+async function parseEventData(eventData) {
     if (!eventData || !eventData.event || !eventData.related || !eventData.related.sessions || !eventData.related.speakers) {
         return null;
     }
@@ -164,3 +180,5 @@ export async function parseEventData(eventData) {
     };
 
 }
+module.exports.parseEventData = parseEventData;
+

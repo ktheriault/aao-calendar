@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Nav, NavItem } from "react-bootstrap";
 import DaySchedule from "../components/DaySchedule";
-import * as api from "../api";
-import { SCHEDULE_VIEWS, ABBR_MONTHS, ABBR_DAYS } from "../global";
+import { getEventByID, parseEventData, SCHEDULE_VIEWS } from "../api";
+import { ABBR_MONTHS, ABBR_DAYS } from "../global";
 
 export default class EventSchedule extends React.Component {
 
@@ -22,8 +22,8 @@ export default class EventSchedule extends React.Component {
 
     async componentDidMount() {
         let { eventID } = this.props;
-        let eventData = await api.getEventByID(eventID, false, true, true);
-        eventData = await api.parseEventData(eventData);
+        let eventData = await getEventByID(eventID, false, true, true);
+        eventData = await parseEventData(eventData);
         if (eventData) {
             let { eventDays, parsedEventSessions } = eventData;
 

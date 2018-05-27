@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import EventSchedule from "../components/EventSchedule";
-import { EVENT_ID } from "../global";
+import { EVENT_ID } from "../api";
 import "../style/App.css";
 
 class App extends React.Component {
