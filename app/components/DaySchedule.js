@@ -98,19 +98,21 @@ export default class DaySchedule extends React.Component {
                         {roomsToDisplay && roomsToDisplay.map((room) => {
                             return (
                                 <div className={classNames("room-name-column")}>
-                                    <div className={classNames("room-name", "overflow-text")}>
-                                        {singleColumnView && (
-                                            <span onClick={onRoomDecrement}
-                                                className={classNames("left-pagination", "text-info", "glyphicon", "glyphicon-chevron-left")}
-                                            />
-                                        )}
-                                        {room}
-                                        {singleColumnView && (
-                                            <span onClick={onRoomIncrement}
-                                                className={classNames("right-pagination", "text-info", "glyphicon", "glyphicon-chevron-right")}
-                                            />
-                                        )}
-                                    </div>
+                                    {singleColumnView ? (
+                                        <div className={classNames("room-name-container")}>
+                                            <div className={classNames("left-pagination", "text-info", "glyphicon", "glyphicon-chevron-left")}
+                                                 onClick={onRoomDecrement}/>
+                                            <div className={classNames("room-selector", "overflow-text")}>
+                                                {room}
+                                            </div>
+                                            <div className={classNames("right-pagination", "text-info", "glyphicon", "glyphicon-chevron-right")}
+                                                 onClick={onRoomIncrement}/>
+                                        </div>
+                                    ) : (
+                                        <div className={classNames("room-name-container")}>
+                                            <div className={classNames("overflow-text")}>{room}</div>
+                                        </div>
+                                    )}
                                 </div>
                             );
                         })}

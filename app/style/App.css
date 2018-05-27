@@ -73,17 +73,17 @@ global.js also sets some default values if it can't parse the CSS, so change tho
     border-left: 1px solid var(--calendar-grid-color);
 }
 
-.room-selector {
-    width: 33%;
-    text-align: center;
-    padding: 0.5em 0;
-}
-
-.room-name {
+.room-name-container {
     height: 2em;
     margin: 0.5em 0;
     padding: 0.25em 0; /* vertical centering */
     text-align: center;
+}
+
+.room-selector {
+    width: 60%;
+    display: inline-block;
+    vertical-align: top; /* Pulls adjacent arrows in line */
 }
 
 .left-pagination {
