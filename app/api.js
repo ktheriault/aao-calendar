@@ -1,4 +1,5 @@
 // jquery only works on client side, so tests can pass in another request function to API calls
+// Pass in a request function rather than a flag because request-promise breaks build
 let $ = require("jquery");
 
 const EVENT_ID = "213800ffda91408c9266c28b954e95f6";
