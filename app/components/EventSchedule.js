@@ -22,7 +22,7 @@ export default class EventSchedule extends React.Component {
 
     async componentDidMount() {
         let { eventID } = this.props;
-        let eventData = await getEventByID(eventID, false, true, true);
+        let eventData = await getEventByID(eventID, false, false, true);
         eventData = await parseEventData(eventData);
         if (eventData) {
             let { eventDays, parsedEventSessions } = eventData;
